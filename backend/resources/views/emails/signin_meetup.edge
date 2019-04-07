@@ -1,0 +1,14 @@
+<strong>Inscrição confirmada</strong>
+
+<p>Parabéns {{ username }}, você acabou de se inscrever para particiar de um novo meetup no Meetapp.</p>
+
+<p> Seguem as informações: </p>
+
+<ul>
+  <li>Titulo: {{ title }}</li>
+  <li>Descrição: {{ description }}</li>
+  <li>Local de realização: {{ location }}</li>
+  @if(hasFile)
+    <p><img src="{{file}}" alt="Meetup"/></p>
+  @endif
+</ul>

@@ -1,0 +1,45 @@
+{
+  "simpleUser": {
+    "username": "newUserSample",
+    "email": "newUserSample@yahoo.com.br",
+    "password": "111111"
+  },
+  "userDataComplete": {
+    "username": "newUser",
+    "email": "newUser@yahoo.com.br",
+    "password": "111111",
+    "password_confirmation": "111111",
+    "preferences": []
+  },
+  "userWithoutPassConfirm": {
+    "username": "newUser",
+    "email": "newUser@yahoo.com.br",
+    "password": "111111",
+    "preferences": []
+  },
+  "userWithouEmail": {
+    "username": "newUser",
+    "password": "111111",
+    "password_confirmation": "111111",
+    "preferences": []
+  },
+  "userWrongEmail": {
+    "username": "newUser",
+    "email": "newUseryahoo.com.br",
+    "password": "111111",
+    "password_confirmation": "111111",
+    "preferences": []
+  },
+  "userWithouName": {
+    "email": "newUser@yahoo.com.br",
+    "password": "111111",
+    "password_confirmation": "111111",
+    "preferences": []
+  },
+  "userWithouPass": {
+    "username": "newUser",
+    "email": "newUser@yahoo.com.br",
+    "password_confirmation": "111111",
+    "preferences": []
+  }
+}
