@@ -1,16 +1,17 @@
-import React, { Fragment } from 'react'
-import Header from '../../components/Header'
-import MeetupList from '../../components/MeetupList'
+import React, { Component, Fragment } from 'react'
+import MeetupsCompleteLists from '../../components/MeetupsCompleteLists'
 
-// import { Container } from './styles';
+class Search extends Component {
+  state = {}
 
-const Search = () => (
-  <Fragment>
-    <div>Search</div>
-    <Header />
-    <input placeholder="Buscar meetups" />
-    <MeetupList />
-  </Fragment>
-)
+  render() {
+    return (
+      <Fragment>
+        <TextField />
+        <MeetupsCompleteLists />
+      </Fragment>
+    )
+  }
+}
 
 export default Search

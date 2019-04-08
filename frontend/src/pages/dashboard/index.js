@@ -1,16 +1,16 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
+import MeetupsCompleteLists from '../../components/MeetupsCompleteLists'
 
-import Header from '../../components/Header'
-import MeetupList from '../../components/MeetupList'
+class Dashboard extends Component {
+  state = {}
 
-// import { Container } from './styles';
-
-const Dashboard = () => (
-  <Fragment>
-    <div>Dashboard</div>
-    <Header />
-    <MeetupList />
-  </Fragment>
-)
+  render() {
+    return (
+      <Fragment>
+        <MeetupsCompleteLists />
+      </Fragment>
+    )
+  }
+}
 
 export default Dashboard
