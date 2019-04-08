@@ -6,10 +6,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: ${metrics.basePadding * 3}px;
-  padding-right: ${metrics.basePadding * 3}px;
-  padding-top: ${metrics.basePadding * 2}px;
-  padding-bottom: ${metrics.basePadding * 2}px;
+  padding: ${metrics.basePadding * 2}px ${metrics.basePadding * 3}px ${metrics.basePadding * 2}px
+    ${metrics.basePadding * 3}px;
+  margin-bottom: ${metrics.baseMargin * 2}px;
   background: ${colors.primary};
 
   div#img {

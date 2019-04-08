@@ -1,6 +1,8 @@
 const font = 2
 
 export default {
+  baseDefault: 100,
+
   basePadding: 10,
   baseMargin: 20,
   baseRadius: 5,
