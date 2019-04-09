@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 import MeetupCard from './MeetupCard'
-import card from '../../assets/card.png'
+import card from '../../../assets/card.png'
 
 import { Container, Content, ButtonPagination } from './styles'
 
-export default class MeetupList extends Component {
+export default class MeetupIndividualList extends Component {
   state = {}
 
   render() {

@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react'
-import Header from '../Header'
-import MeetupList from '../MeetupList'
+import React, { Component } from 'react'
+import MeetupIndividualList from './MeetupIndividualList'
 
 import { Container, Content } from './styles'
 
@@ -9,23 +8,20 @@ class MeetupsCompleteLists extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Header />
-        <Container>
-          <Content>
-            Inscrições
-            <MeetupList />
-          </Content>
-          <Content>
-            Próximos Meetups
-            <MeetupList />
-          </Content>
-          <Content>
-            Recomendados
-            <MeetupList />
-          </Content>
-        </Container>
-      </Fragment>
+      <Container>
+        <Content>
+          Inscrições
+          <MeetupIndividualList />
+        </Content>
+        <Content>
+          Próximos Meetups
+          <MeetupIndividualList />
+        </Content>
+        <Content>
+          Recomendados
+          <MeetupIndividualList />
+        </Content>
+      </Container>
     )
   }
 }

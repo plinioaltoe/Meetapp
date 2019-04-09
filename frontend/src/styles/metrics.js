@@ -11,6 +11,8 @@ export default {
   thumbHeight: 130,
   cardHeight: 210,
 
+  inputHeight: 40,
+
   font: {
     bigger: font * 12,
     big: font * 10,

@@ -3,12 +3,12 @@ export default {
   lighter: '#f5f5f5',
   light: '#DDD',
   regular: '#999',
-  dark: '#666',
+  dark: '#334',
   darker: '#222',
   black: '#000',
 
   primary: '#E5556E',
-  secondary: '#1D2331',
+  secondary: '#23202C',
 
   success: '#9dca83',
   danger: '#e37a7a',
