@@ -1,16 +1,26 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
-// import { Container } from './styles';
+import { Container, TextField } from './styles'
 
 const UserInputs = () => (
-  <Fragment>
-    <div>Profile</div>
-    <input placeholder="Digite seu nome" />
-    <input placeholder="Sua senha secreta" />
-    <input placeholder="Confirmação de senha secreta" />
-    <p>aqui será um upload</p>
-    <input placeholder="Onde seu meetup irá acontecer?" />
-  </Fragment>
+  <Container>
+    Nome
+    <div>
+      <TextField placeholder="Digite seu nome" />
+    </div>
+    E-mail
+    <div>
+      <TextField placeholder="Digite seu e-mail" />
+    </div>
+    Senha
+    <div>
+      <TextField placeholder="Sua senha secreta" />
+    </div>
+    Confirmação de senha
+    <div>
+      <TextField placeholder="Confirmação de senha secreta" />
+    </div>
+  </Container>
 )
 
 export default UserInputs

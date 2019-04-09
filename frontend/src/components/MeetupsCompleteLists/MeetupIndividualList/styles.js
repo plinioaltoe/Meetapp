@@ -6,11 +6,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding: ${metrics.basePadding}px 0 ${metrics.basePadding}px 0;
   margin-bottom: ${metrics.baseMargin}px;
-
-  }
 `
 
 export const Content = styled.div`
@@ -18,7 +15,6 @@ export const Content = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: auto;
   padding: ${metrics.basePadding}px 0 ${metrics.basePadding}px 0;
   margin-bottom: ${metrics.baseMargin}px;
   align-items: center;
