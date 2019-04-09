@@ -10,18 +10,16 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 0 0 ${metrics.basePadding * 2}px 0;
   position: relative;
+`
 
-  font-family: Helvetica-Bold;
+export const Text = styled.div`
+  font-weight: bold;
   font-size: ${metrics.font.small}px;
-  color: #ffffff;
-  text-align: left;
-
-  div {
-    padding: 0 0 ${metrics.basePadding * 2}px 0;
-  }
+  color: ${colors.white};
 `
 
 export const TextField = styled.input`
+  margin: 0 0 ${metrics.basePadding * 2}px 0;
   background-color: ${colors.secondary};
   border-radius: ${metrics.baseRadius}px;
   width: ${metrics.baseDefault * 3}px;

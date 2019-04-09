@@ -7,10 +7,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding-left: ${metrics.basePadding * 3}px;
-  padding-right: ${metrics.basePadding * 3}px;
-  padding-top: ${metrics.basePadding * 2}px;
-  padding-bottom: ${metrics.basePadding * 2}px;
+  padding-top: ${metrics.basePadding}px;
+  padding-bottom: ${metrics.basePadding * 3}px;
   font-color: ${metrics.white};
 
   ul {
@@ -18,7 +16,7 @@ export const Container = styled.div`
     li {
       display: flex;
       align-items: center;
-      padding-top: ${metrics.basePadding}px;
+      padding-top: ${metrics.basePadding * 1.5}px;
 
       div {
         font-size: ${metrics.font.mean}px;

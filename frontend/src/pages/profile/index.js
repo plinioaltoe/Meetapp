@@ -3,9 +3,9 @@ import Header from '../../components/Header'
 import UserInputs from '../../components/UserInputs'
 import PreferencesList from '../../components/PreferencesList'
 
-import { Container } from './styles'
+import { Container, Button, Text } from './styles'
 
-export default class profile extends Component {
+export default class Profile extends Component {
   state = {}
 
   render() {
@@ -15,9 +15,10 @@ export default class profile extends Component {
         <Container>
           <form>
             <UserInputs />
+            <Text>Preferências</Text>
+            <PreferencesList />
+            <Button onClick={() => {}}>Salvar</Button>
           </form>
-          Preferências
-          <PreferencesList />
         </Container>
       </Fragment>
     )

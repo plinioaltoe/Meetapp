@@ -1,25 +1,17 @@
 import React from 'react'
 
-import { Container, TextField } from './styles'
+import { Container, TextField, Text } from './styles'
 
 const UserInputs = () => (
   <Container>
-    Nome
-    <div>
-      <TextField placeholder="Digite seu nome" />
-    </div>
-    E-mail
-    <div>
-      <TextField placeholder="Digite seu e-mail" />
-    </div>
-    Senha
-    <div>
-      <TextField placeholder="Sua senha secreta" />
-    </div>
-    Confirmação de senha
-    <div>
-      <TextField placeholder="Confirmação de senha secreta" />
-    </div>
+    <Text>Nome</Text>
+    <TextField placeholder="Digite seu nome" />
+    <Text>E-mail</Text>
+    <TextField placeholder="Digite seu e-mail" />
+    <Text>Senha</Text>
+    <TextField placeholder="Sua senha secreta" />
+    <Text>Confirmação de senha</Text>
+    <TextField placeholder="Confirmação de senha secreta" />
   </Container>
 )
 
