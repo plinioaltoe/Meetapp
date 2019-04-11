@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
+import Header from '../../components/Header'
 
-// import { Container } from './styles';
+import card from '../../assets/card.png'
 
-const MeetupDetail = () => <div>MeetupDetail</div>
+import {
+  Container, Button, Titulo, Descricao, Detalhes, Endereco, Content,
+} from './styles'
 
-export default MeetupDetail
+export default class meetupDetail extends Component {
+  state = {}
+
+  render() {
+    return (
+      <Fragment>
+        <Header />
+        <Container>
+          <img src={card} alt="Meetup" />
+          <Content>
+            <Titulo>Meetup React Native</Titulo>
+            <Detalhes>120 membros</Detalhes>
+            <Descricao>
+              O meetup de React Native é um espaço para discutir sobre tecnologias por volta do desenvolvimento web
+              utilizando a biblioteca do Facebook para criação de interfaces móveis multiplataforma com Javascript.
+            </Descricao>
+            <Detalhes>Realizado em:</Detalhes>
+            <Endereco>Rua Guilherme Gembala, 260, Rio do Sul - SC</Endereco>
+
+            <Button onClick={() => {}}>Inscreva-se</Button>
+          </Content>
+        </Container>
+      </Fragment>
+    )
+  }
+}

@@ -45,3 +45,37 @@ export const TextField = styled.input`
     opacity: 0.5;
   }
 `
+
+export const TextArea = styled.textarea`
+  background-color: ${colors.secondary};
+  border-radius: ${metrics.baseRadius}px;
+  width: ${metrics.baseDefault * 3.4}px;
+  height: ${metrics.inputHeight * 3}px;
+  border: 0;
+  margin: ${metrics.basePadding}px 0 ${metrics.basePadding * 2}px 0;
+
+  font-family: Helvetica;
+  font-size: ${metrics.font.big}px;
+  color: ${colors.white};
+
+  text-align: left;
+  resize: none;
+
+  ::placeholder {
+    opacity: 0.5;
+  }
+`
+
+export const Img = styled.div`
+  margin: ${metrics.basePadding * 2}px 0 ${metrics.basePadding * 2}px 0;
+  box-sizing: content-box;
+  border: dashed ${colors.white} 1px;
+  opacity: 0.2;
+  padding: ${metrics.basePadding * 3}px ${metrics.basePadding * 10}px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  i {
+    color: ${colors.white};
+  }
+`

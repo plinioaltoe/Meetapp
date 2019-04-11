@@ -13,13 +13,13 @@ export default class MeetupIndividualList extends Component {
       <Container>
         <Content>
           <div>
-            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" goToMeetupDetail={() => {}} />
+            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" />
           </div>
           <div>
-            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" goToMeetupDetail={() => {}} />
+            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" />
           </div>
           <div>
-            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" goToMeetupDetail={() => {}} />
+            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" />
           </div>
         </Content>
         <ButtonPagination>

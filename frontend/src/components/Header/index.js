@@ -9,7 +9,6 @@ const Header = () => (
   <Container>
     <div id="img">
       <img src={logo} alt="logo" />
-      {/* <div id='logo' style='background:url(${logo})'></div> */}
     </div>
     <Menu>
       <Link to="/dashboard">Inicio</Link>
