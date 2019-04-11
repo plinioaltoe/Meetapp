@@ -14,7 +14,7 @@ export default class Profile extends Component {
         <Header />
         <Container>
           <form>
-            <UserInputs />
+            <UserInputs display="profile" />
             <Text>Preferências</Text>
             <PreferencesList />
             <Button onClick={() => {}}>Salvar</Button>

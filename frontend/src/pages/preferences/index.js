@@ -1,17 +1,31 @@
-import React, { Fragment } from 'react'
-
+import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import PreferencesList from '../../components/PreferencesList'
-// import { Container } from './styles';
+import {
+  Titulo, Descricao, Content, Container, Text, Button,
+} from './styles'
 
-const Preferences = () => {
-  const texto = 'Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para selecionarmos os melhores meetups pra você:'
-  return (
-    <Fragment>
-      <div>Preferences</div>
-      <h1>Olá fulano</h1>
-      <h2>{texto}</h2>
-      <PreferencesList />
-    </Fragment>
-  )
+export default class preferences extends Component {
+  state = {
+    redirect: false,
+  }
+
+  goTo = () => this.setState({ redirect: true })
+
+  render() {
+    const { redirect } = this.state
+    const texto = 'Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para selecionarmos os melhores meetups pra você:'
+    return (
+      <Container>
+        {redirect && <Redirect push to="/dashboard" />}
+        <Content>
+          <Titulo>Olá fulano</Titulo>
+          <Descricao>{texto}</Descricao>
+          <Text>Preferências</Text>
+          <PreferencesList />
+          <Button onClick={() => this.goTo()}>Continuar</Button>
+        </Content>
+      </Container>
+    )
+  }
 }
-export default Preferences

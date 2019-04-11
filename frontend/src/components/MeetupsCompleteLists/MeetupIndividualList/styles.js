@@ -33,6 +33,7 @@ button {
   width: ${metrics.baseMargin}px;
   background: ${colors.primary};
   border-style: none;
+  cursor: pointer;
   i {
     color: ${colors.white};
   }

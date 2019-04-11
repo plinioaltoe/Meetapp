@@ -8,13 +8,26 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0 0 ${metrics.baseDefault * 3}px 0;
+  padding: 0 0 ${metrics.basePadding * 2}px 0;
   position: relative;
+  padding: ${metrics.baseDefault * 2.6}px 0 ${metrics.baseDefault * 3}px 0;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `
+export const Img = styled.img`
+  padding: 0px 0px ${metrics.basePadding * 4}px 0;
+`
+
 export const Text = styled.div`
-  font-weight: bold;
+  padding: ${metrics.basePadding * 2}px 0 0 0;
   font-size: ${metrics.font.small}px;
   color: ${colors.white};
+  opacity: 0.6;
+  cursor: pointer;
 `
 
 export const Button = styled.button`

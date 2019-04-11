@@ -9,17 +9,10 @@ export const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   position: relative;
-  padding: 0 0 ${metrics.baseDefault * 3}px 0;
-  img {
-    max-width: ${metrics.baseDefault * 9}px;
-    max-height: ${metrics.thumbHeight * 4}px;
-    min-width: ${metrics.baseDefault * 4}px;
-    min-height: ${metrics.thumbHeight * 2}px;
-    padding: 0 0 ${metrics.basePadding * 3}px 0;
-  }
+  padding: ${metrics.baseDefault * 2.6}px 0 ${metrics.baseDefault * 3}px 0;
 `
 export const Content = styled.div`
-  max-width: ${metrics.baseMargin * 15}px;
+  max-width: ${metrics.baseMargin * 16}px;
 `
 
 export const Titulo = styled.div`
@@ -36,16 +29,11 @@ export const Descricao = styled.div`
   line-height: 28px;
   padding: ${metrics.basePadding * 2}px 0 ${metrics.basePadding * 2}px 0;
 `
-export const Detalhes = styled.div`
-  font-size: ${metrics.font.smaller}px;
-  color: ${colors.regular};
-`
-export const Endereco = styled.div`
-  font-size: ${metrics.font.smaller}px;
+
+export const Text = styled.div`
+  font-weight: bold;
+  font-size: ${metrics.font.small}px;
   color: ${colors.white};
-  opacity: 0.8;
-  line-height: 24px;
-  padding: ${metrics.basePadding}px 0 ${metrics.basePadding * 3}px 0;
 `
 
 export const Button = styled.button`

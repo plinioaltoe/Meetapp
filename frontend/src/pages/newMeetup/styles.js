@@ -8,7 +8,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0 0 ${metrics.basePadding * 2}px 0;
+  padding: 0 0 ${metrics.baseDefault * 3}px 0;
   position: relative;
 `
 export const Text = styled.div`
@@ -26,6 +26,7 @@ export const Button = styled.button`
   color: ${colors.white};
   font-size: ${metrics.font.small}px;
   font-weight: bold;
+  cursor: pointer;
 `
 
 export const TextField = styled.input`

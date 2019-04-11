@@ -27,6 +27,7 @@ export const Content = styled.div`
     height: ${metrics.baseMargin * 2}px;
     width: ${metrics.baseMargin * 2}px;
     background: ${colors.primary};
+    cursor: pointer;
     i {
       color: ${colors.white};
     }

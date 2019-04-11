@@ -36,7 +36,7 @@ export default class PreferencesList extends Component {
 
   render() {
     const { preferences, allIsChecked } = this.state
-    const checkAllText = 'Marque / Desmarque todas as opções'
+    const checkAllText = 'Marque / Desmarque todas'
     return (
       <Container>
         <ul>
