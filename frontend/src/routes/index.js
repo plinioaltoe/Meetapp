@@ -1,31 +1,57 @@
-import React, { Fragment } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import React from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
+import PropTypes from 'prop-types'
+import { ConnectedRouter } from 'connected-react-router'
 import Dashboard from '../pages/dashboard'
-import Login from '../pages/login'
+import Signin from '../pages/signin'
 import MeetupDetail from '../pages/meetupDetail'
 import NewMeetup from '../pages/newMeetup'
 import Preferences from '../pages/preferences'
 import Profile from '../pages/profile'
 import Search from '../pages/search'
 import Signup from '../pages/signup'
+import history from './history'
+
+import { isAuthenticated } from '../services/auth'
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (isAuthenticated() ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+    ))
+    }
+  />
+)
+
+PrivateRoute.defaultProps = {
+  component: () => {},
+  location: {},
+}
+
+PrivateRoute.propTypes = {
+  component: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  location: PropTypes.object,
+}
 
 const Routes = () => (
-  <BrowserRouter>
-    <Fragment>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/meetupDetail/:id" component={MeetupDetail} />
-        <Route exact path="/newMeetup" component={NewMeetup} />
-        <Route exact path="/preferences" component={Preferences} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/search" component={Search} />
-        <Route exact path="/signup" component={Signup} />
-        <Route path="/" component={Dashboard} />
-      </Switch>
-    </Fragment>
-  </BrowserRouter>
+  <ConnectedRouter history={history}>
+    <Switch>
+      <Route exact path="/" component={Signin} />
+      <Route exact path="/signup" component={Signup} />
+      <PrivateRoute exact path="/dashboard" component={Dashboard} />
+      <PrivateRoute exact path="/meetupDetail/:id" component={MeetupDetail} />
+      <PrivateRoute exact path="/newMeetup" component={NewMeetup} />
+      <PrivateRoute exact path="/preferences" component={Preferences} />
+      <PrivateRoute exact path="/profile" component={Profile} />
+      <PrivateRoute exact path="/search" component={Search} />
+      <Route path="*" component={() => <h1>Page not found</h1>} />
+    </Switch>
+  </ConnectedRouter>
 )
 
 export default Routes

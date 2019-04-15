@@ -11,13 +11,22 @@ export const Container = styled.div`
   padding: 0 0 ${metrics.basePadding * 2}px 0;
   position: relative;
   padding: ${metrics.baseDefault * 2.6}px 0 ${metrics.baseDefault * 3}px 0;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+`
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min-content;
+  p {
+    color: ${colors.danger};
+    margin-bottom: ${metrics.baseMargin}px;
+    border: 1px solid ${colors.danger};
+    padding: ${metrics.basePadding}px;
+    width: 100%;
+    text-align: center;
   }
 `
+
 export const Img = styled.img`
   padding: 0px 0px ${metrics.basePadding * 4}px 0;
 `

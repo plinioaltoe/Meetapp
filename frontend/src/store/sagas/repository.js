@@ -1,8 +1,7 @@
 import { call, put } from 'redux-saga/effects'
+import { toast } from 'react-toastify'
 import api from '../../services/api'
 import { Creators as RepositoryActions } from '../ducks/repository'
-
-import { toast } from 'react-toastify'
 
 export function* addRepository(action) {
   try {
@@ -13,7 +12,7 @@ export function* addRepository(action) {
     const repositoryData = {
       id: data.id,
       name: data.name,
-      login: data.login,
+      signin: data.signin,
       avatar_url: data.avatar_url,
       repos_url: data.repos_url,
       latitude,

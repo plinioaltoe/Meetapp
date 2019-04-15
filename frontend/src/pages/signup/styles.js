@@ -16,6 +16,15 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: min-content;
+    p {
+      color: ${colors.danger};
+      margin-bottom: ${metrics.baseMargin}px;
+      border: 1px solid ${colors.danger};
+      padding: ${metrics.basePadding}px;
+      width: 100%;
+      text-align: center;
+    }
   }
 `
 export const Img = styled.img`

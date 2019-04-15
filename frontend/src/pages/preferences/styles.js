@@ -11,7 +11,7 @@ export const Container = styled.div`
   position: relative;
   padding: ${metrics.baseDefault * 2.6}px 0 ${metrics.baseDefault * 3}px 0;
 `
-export const Content = styled.div`
+export const Form = styled.form`
   max-width: ${metrics.baseMargin * 16}px;
 `
 

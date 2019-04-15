@@ -33,5 +33,52 @@ export const Menu = styled.div`
     color: ${colors.white};
     padding-left: ${metrics.basePadding * 3}px;
     text-decoration: none;
+    :hover {
+      color: ${colors.white};
+      text-shadow: 0px 0px 5px ${colors.white};
+    }
+  }
+`
+export const MenuProfile = styled.div`
+  a {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: ${metrics.font.small}px;
+    color: ${colors.white};
+    background: ${colors.primary};
+    padding: ${metrics.basePadding * 2}px ${metrics.basePadding}px ${metrics.basePadding * 2}px ${metrics.basePadding}px;
+    text-decoration: none;
+    :hover {
+      color: ${colors.white};
+      text-shadow: 0px 0px 5px ${colors.white};
+    }
+  }
+
+  li {
+    display: block;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+
+  ul {
+    position: absolute;
+
+    right: 0;
+    display: none;
+  }
+
+  :hover > ul,
+  ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+  }
+
+  li {
+    clear: both;
+    width: 100%;
   }
 `
