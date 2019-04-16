@@ -4,7 +4,9 @@ const Preference = use('App/Models/Preference')
 
 class PreferenceController {
   async index () {
-    const preferences = await Preference.query().fetch()
+    const preferences = await Preference.query()
+      .orderBy('id', 'asc')
+      .fetch()
     return preferences
   }
 

@@ -11,8 +11,7 @@ class Meetup {
       title: 'required:meetups',
       description: 'required:meetups',
       location: 'required:meetups',
-      event_date: 'required|date:meetups',
-      owner_id: 'required:meetups'
+      event_date: 'required|date:meetups'
     }
   }
 

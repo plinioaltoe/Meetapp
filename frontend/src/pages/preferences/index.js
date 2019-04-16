@@ -29,7 +29,7 @@ class Preferences extends Component {
   }
 
   state = {
-    preferences: [],
+    userPreferences: [],
     id: 0,
     username: '',
   }
@@ -46,29 +46,36 @@ class Preferences extends Component {
   handleUpdatePreferences = async (e) => {
     e.preventDefault()
     const { updateUserRequest } = this.props
-    const { preferences, id } = this.state
-
+    const { userPreferences, id } = this.state
     updateUserRequest({
       id,
-      preferences,
+      preferences: userPreferences,
     })
   }
 
   handleChangePreferences = (preferences) => {
-    this.setState({ ...preferences })
+    const userPreferences = []
+    preferences.map((pref) => {
+      if (pref.isChecked) userPreferences.push(pref.id)
+      return true
+    })
+    this.setState({ userPreferences })
   }
 
   render() {
-    const { username } = this.state
-
+    const { username, userPreferences } = this.state
+    const { handleChangePreferences } = this
     const texto = 'Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para selecionarmos os melhores meetups pra você:'
     return (
       <Container>
-        <Form onSumbit={this.handleUpdatePreferences}>
+        <Form onSubmit={this.handleUpdatePreferences}>
           <Titulo>Olá {username}</Titulo>
           <Descricao>{texto}</Descricao>
           <Text>Preferências</Text>
-          <PreferencesList handleChangePreferences={this.handleChangePreferences} />
+          <PreferencesList
+            handleChangePreferences={handleChangePreferences}
+            sentPreferences={userPreferences}
+          />
           <Button type="submit">Continuar</Button>
         </Form>
       </Container>

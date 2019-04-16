@@ -1,6 +1,5 @@
 'use strict'
 
-const Database = use('Database')
 const Meetup = use('App/Models/Meetup')
 
 class MeetupController {
@@ -26,18 +25,12 @@ class MeetupController {
     ])
     const preferences = request.input('preferences')
 
-    const trx = await Database.beginTransaction()
+    const meetup = await Meetup.create({
+      ...data,
+      owner_id: auth.user.id
+    })
 
-    const meetup = await Meetup.create(
-      {
-        ...data,
-        owner_id: auth.user.id
-      },
-      trx
-    )
-
-    await meetup.preferences().sync(preferences, trx)
-    trx.commit()
+    await meetup.preferences().sync(preferences)
 
     return meetup
   }

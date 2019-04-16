@@ -4,7 +4,9 @@
 
 export const Types = {
   SIGNIN_REQUEST: 'auth/SIGNIN_REQUEST',
-  SIGNIN_FAILURE: 'auth/SIGNIN_FAILURE',
+  FAILURE: 'auth/FAILURE',
+  GET_LOGGED_REQUEST: 'auth/GET_LOGGED_REQUEST',
+  GET_LOGGED_SUCESS: 'auth/GET_LOGGED_SUCESS',
 }
 
 /**
@@ -13,14 +15,24 @@ export const Types = {
 const INITIAL_STATE = {
   loading: false,
   error: '',
+  data: {},
 }
 
 export default function auth(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.SIGNIN_REQUEST:
       return { ...state, loading: true, error: '' }
-    case Types.SIGNIN_FAILURE:
+    case Types.FAILURE:
       return { ...state, loading: false, error: action.payload.error }
+    case Types.GET_LOGGED_REQUEST:
+      return { ...state, loading: true, error: '' }
+    case Types.GET_LOGGED_SUCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        data: action.payload.data,
+      }
     default:
       return state
   }
@@ -36,7 +48,17 @@ export const Creators = {
   }),
 
   authFailure: error => ({
-    type: Types.SIGNIN_FAILURE,
+    type: Types.FAILURE,
     payload: { error },
+  }),
+
+  getLoggedRequest: ({ id, username, email }) => ({
+    type: Types.GET_LOGGED_REQUEST,
+    payload: { id, username, email },
+  }),
+
+  getLoggedSucess: data => ({
+    type: Types.GET_LOGGED_SUCESS,
+    payload: { data },
   }),
 }

@@ -17,12 +17,8 @@ class UserController {
     const data = request.only(['username', 'email', 'password'])
     const preferences = request.input('preferences')
 
-    const trx = await Database.beginTransaction()
-
-    const user = await User.create(data, trx)
-    await user.preferences().sync(preferences, trx)
-
-    await trx.commit()
+    const user = await User.create(data)
+    await user.preferences().attach(preferences)
 
     return response.created(user)
   }

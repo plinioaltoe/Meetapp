@@ -3,37 +3,50 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Container, Checkbox } from './styles'
+import api from '../../services/api'
 
 import { Creators as PreferenceActions } from '../../store/ducks/preference'
 
 class PreferencesList extends Component {
+  static defaultProps = {
+    sentPreferences: [],
+  }
+
   static propTypes = {
     handleChangePreferences: PropTypes.func.isRequired,
-    getPreferenceRequest: PropTypes.func.isRequired,
-    preferences: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        subject: PropTypes.string,
-      }),
-    ).isRequired,
+    sentPreferences: PropTypes.arrayOf(PropTypes.number),
   }
 
   constructor(props) {
     super(props)
     this.state = {
       allIsChecked: false,
-      preferences: props.preferences,
+      preferences: [],
     }
   }
 
-  componentWillMount = async () => {
-    const { getPreferenceRequest } = this.props
-    await getPreferenceRequest()
+  checkSentPreferences = (data) => {
+    if (!data) return []
+
+    const { sentPreferences } = this.props
+    console.log(sentPreferences)
+    if (!sentPreferences) return data
+    const preferences = []
+    let isChecked = false
+
+    data.map((pref) => {
+      isChecked = false
+      const idx = sentPreferences.findIndex(p => p.id === pref.id)
+      if (idx > -1) isChecked = true
+      return preferences.push({ ...pref, isChecked })
+    })
+
+    return preferences
   }
 
-  componentWillReceiveProps = (newProps) => {
-    const { preferences } = newProps
-    this.setState({ preferences })
+  componentWillMount = async () => {
+    const { data } = await api.get('/preferences')
+    this.setState({ preferences: this.checkSentPreferences(data) })
   }
 
   handleCheck = (e, id) => {
@@ -48,12 +61,14 @@ class PreferencesList extends Component {
   handleCheckAll = async () => {
     const { preferences } = this.state
     let { allIsChecked } = this.state
+    const { handleChangePreferences } = this.props
 
     allIsChecked = !allIsChecked
     for (let i = 0; i < preferences.length; i += 1) {
       preferences[i].isChecked = allIsChecked
     }
     this.setState({ preferences, allIsChecked })
+    handleChangePreferences(preferences)
   }
 
   render() {

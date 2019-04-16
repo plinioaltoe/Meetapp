@@ -14,6 +14,8 @@ export function* signin(action) {
     try {
       const { data } = yield call(api.post, '/sessions', { email, password })
       login(data.token)
+      const user = yield call(api.get, '/sessions')
+      yield put(AuthActions.getLoggedSucess(user.data))
       yield put(push(route))
     } catch (error) {
       const erroMsg = 'Houve um problema com o login, verifique suas credenciais.'

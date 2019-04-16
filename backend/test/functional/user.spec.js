@@ -33,14 +33,10 @@ test('get one user', async ({ client }) => {
     .type('json')
     .end()
   response.assertStatus(200)
-  response.assertJSONSubset([
-    {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      password: user.password
-    }
-  ])
+  response.assertJSONSubset({
+    username: user.username,
+    email: user.email
+  })
   await user.delete()
 })
 

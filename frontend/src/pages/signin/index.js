@@ -7,7 +7,6 @@ import UserInputs from '../../components/UserInputs'
 import logo from '../../assets/logo.svg'
 
 import { Creators as AuthActions } from '../../store/ducks/auth'
-import { Creators as PreferenceActions } from '../../store/ducks/preference'
 
 import {
   Container, Button, Text, Img, Form,
@@ -32,11 +31,10 @@ class Signin extends Component {
 
   handleSignIn = async (e) => {
     e.preventDefault()
-    const { authRequest, getPreferenceRequest } = this.props
+    const { authRequest } = this.props
     const { email, password } = this.state
     const route = '/dashboard'
     await authRequest({ email, password, route })
-    await getPreferenceRequest()
   }
 
   handleChange = (e, campo) => {
@@ -70,7 +68,6 @@ const mapStateToProps = state => ({
   error: state.auth.error,
 })
 
-// const actions = { ...AuthActions, ...PreferenceActions }
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch)
 
 export default compose(

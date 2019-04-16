@@ -5,6 +5,7 @@ import repository from './repository'
 import auth from './auth'
 import user from './user'
 import preference from './preference'
+import meetup from './meetup'
 
 export default combineReducers({
   router: connectRouter(history),
@@ -12,4 +13,5 @@ export default combineReducers({
   auth,
   user,
   preference,
+  meetup,
 })

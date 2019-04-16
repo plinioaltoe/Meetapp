@@ -48,15 +48,13 @@ export function* updateUser(action) {
     const erroMsg = 'Passwords não conferem!'
     yield put(UserActions.addOrUpdateUserFailure(erroMsg))
   } else {
-    const userToUpdate = {
-      username,
-      password,
-      password_confirmation: passwordConfirmation,
-      preferences,
-    }
+    const userToUpdate = {}
+    if (username) userToUpdate.username = username
+    if (password) userToUpdate.password = password
+    if (passwordConfirmation) userToUpdate.password_confirmation = passwordConfirmation
+    if (preferences) userToUpdate.preferences = preferences
     try {
-      const { data } = yield call(api.post, `/users/${id}`, userToUpdate)
-      console.log(data)
+      const { data } = yield call(api.put, `/users/${id}`, userToUpdate)
       const userData = {
         id: data.id,
         username: data.username,
@@ -66,8 +64,8 @@ export function* updateUser(action) {
       yield put(UserActions.addOrUpdateUserSuccess(userData))
       yield put(push('/dashboard'))
     } catch (error) {
-      const erroMsg = 'Erro ao adicionar usuário'
-      yield put(UserActions.addOrUpdateUserFailure(erroMsg, error))
+      const erroMsg = 'Erro ao atualizar usuário'
+      yield put(UserActions.addOrUpdateUserFailure(erroMsg + error + userToUpdate))
     }
   }
 }

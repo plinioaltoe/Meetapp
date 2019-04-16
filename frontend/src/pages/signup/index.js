@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, compose } from 'redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
-import { withRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import UserInputs from '../../components/UserInputs'
 import logo from '../../assets/logo.svg'
 import { Creators as UserActions } from '../../store/ducks/user'
@@ -27,7 +27,7 @@ class Signup extends Component {
     passwordConfirmation: '',
   }
 
-  handleSignup = async (e) => {
+  handleSignup = (e) => {
     e.preventDefault()
     const { addUserRequest } = this.props
     const {
@@ -83,10 +83,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 
-export default compose(
-  withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(Signup)
