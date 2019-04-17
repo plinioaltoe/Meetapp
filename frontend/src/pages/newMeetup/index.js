@@ -7,6 +7,7 @@ import Flatpickr from 'react-flatpickr'
 import PreferencesList from '../../components/PreferencesList'
 import Header from '../../components/Header'
 import { Creators as MeetupActions } from '../../store/ducks/meetup'
+import { Creators as FileActions } from '../../store/ducks/file'
 
 import 'flatpickr/dist/themes/dark.css'
 
@@ -15,8 +16,29 @@ import {
 } from './styles'
 
 class NewMeetup extends Component {
+  static defaultProps = {
+    error: '',
+    errorFile: '',
+  }
+
   static propTypes = {
     addMeetupRequest: PropTypes.func.isRequired,
+    addFileRequest: PropTypes.func.isRequired,
+
+    error: PropTypes.string,
+    errorFile: PropTypes.string,
+    file: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        file: PropTypes.string,
+        name: PropTypes.string,
+        type: PropTypes.string,
+        subtype: PropTypes.string,
+        url: PropTypes.string,
+        createdAt: PropTypes.string,
+        updatedAt: PropTypes.string,
+      }),
+    ).isRequired,
   }
 
   state = {
@@ -62,17 +84,33 @@ class NewMeetup extends Component {
     this.setState({ meetupPreferences })
   }
 
-  handleUpload = () => {}
+  handleClickUpload = () => {
+    this.fileInputRef.click()
+    this.fileInputRef.addEventListener('change', (file) => {
+      const { addFileRequest } = this.props
+
+      // const fileToUpload = this.fileInputRef.value
+      console.log('file->', file)
+      addFileRequest({
+        fileToUpload: file,
+      })
+    })
+  }
+
+  fileInputRef
 
   render() {
     const {
       eventDate, title, description, location, meetupPreferences,
     } = this.state
+    const { error, errorFile, file } = this.props
+    console.log(file)
     return (
       <Fragment>
         <Header />
         <Container>
           <form onSubmit={this.handleAddMeetup}>
+            {error && <p>{error}</p>}
             <Text>Título</Text>
             <TextField
               placeholder="Digite o título do meetup"
@@ -87,10 +125,24 @@ class NewMeetup extends Component {
               value={description}
               onChange={e => this.handleChange(e, 'description')}
             />
+            {errorFile && <p>{errorFile}</p>}
             <Text>Imagem</Text>
-            <Img onClick={this.handleUpload}>
-              <i className="fa fa-camera" />
+            <Img onClick={this.handleClickUpload} htmlFor="file">
+              {file.url ? (
+                <img src={file.url} alt="file" />
+              ) : (
+                <i className="fa fa-camera" />
+              )}
+              <input
+                id="file"
+                type="file"
+                name="file"
+                ref={(input) => {
+                  this.fileInputRef = input
+                }}
+              />
             </Img>
+
             <Text>Localização</Text>
             <TextField
               placeholder="Onde seu meetup irá acontecer?"
@@ -125,9 +177,12 @@ const mapStateToProps = state => ({
   meetup: state.meetup.data,
   loading: state.meetup.loading,
   error: state.meetup.error,
+  file: state.file.data,
+  loadingFile: state.file.loading,
+  errorFile: state.file.error,
 })
-
-const mapDispatchToProps = dispatch => bindActionCreators(MeetupActions, dispatch)
+const binders = { ...MeetupActions, ...FileActions }
+const mapDispatchToProps = dispatch => bindActionCreators(binders, dispatch)
 
 export default connect(
   mapStateToProps,

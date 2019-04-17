@@ -31,9 +31,7 @@ export function* addMeetup(action) {
       preferences,
     }
     try {
-      console.log(JSON.stringify(meetupAttibutes))
       const { data } = yield call(api.post, `/meetups/`, meetupAttibutes)
-      console.log(`dpois`, meetupAttibutes)
       yield put(MeetupActions.addOrUpdateMeetupSuccess(data))
       yield put(push('/dashboard'))
     } catch (error) {
