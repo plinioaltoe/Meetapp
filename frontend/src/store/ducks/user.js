@@ -4,9 +4,12 @@
 
 export const Types = {
   UPDATE_REQUEST: 'user/UPDATE_REQUEST',
+  SET_STATE_REQUEST: 'user/SET_STATE_REQUEST',
   ADD_REQUEST: 'user/ADD_REQUEST',
-  ADD_OR_UPDATE_SUCESS: 'user/ADD_OR_UPDATE_SUCESS',
-  ADD_OR_UPDATE_FAILURE: 'user/ADD_OR_UPDATE_FAILURE',
+  GET_REQUEST: 'user/GET_REQUEST',
+  SUCCESS: 'user/SUCCESS',
+  STATE_SUCCESS: 'user/STATE_SUCCESS',
+  FAILURE: 'user/FAILURE',
 }
 
 /**
@@ -20,18 +23,26 @@ const INITIAL_STATE = {
 
 export default function user(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.ADD_REQUEST:
+    case Types.ADD_REQUEST
+      || Types.UPDATE_REQUEST
+      || Types.GET_REQUEST
+      || Types.SET_STATE_REQUEST:
       return { ...state, loading: true, error: '' }
-    case Types.UPDATE_REQUEST:
-      return { ...state, loading: true, error: '' }
-    case Types.ADD_OR_UPDATE_SUCESS:
+    case Types.SUCCESS:
       return {
         ...state,
         loading: false,
         error: '',
         data: action.payload.data,
       }
-    case Types.ADD_OR_UPDATE_FAILURE:
+    case Types.STATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        data: { ...state.data, ...action.payload.data },
+      }
+    case Types.FAILURE:
       return { ...state, loading: false, error: action.payload.error }
     default:
       return state
@@ -50,30 +61,37 @@ export const Creators = {
       username,
       email,
       password,
-      passwordConfirmation,
+      password_confirmation: passwordConfirmation,
     },
   }),
 
-  updateUserRequest: ({
-    id, username, password, passwordConfirmation, preferences,
-  }) => ({
+  updateUserRequest: data => ({
     type: Types.UPDATE_REQUEST,
-    payload: {
-      id,
-      username,
-      password,
-      passwordConfirmation,
-      preferences,
-    },
+    payload: data,
   }),
 
-  addOrUpdateUserSuccess: data => ({
-    type: Types.ADD_OR_UPDATE_SUCESS,
+  setStateUserRequest: data => ({
+    type: Types.SET_STATE_REQUEST,
+    payload: data,
+  }),
+
+  getUserRequest: data => ({
+    type: Types.GET_REQUEST,
+    payload: data,
+  }),
+
+  userSuccess: data => ({
+    type: Types.SUCCESS,
     payload: { data },
   }),
 
-  addOrUpdateUserFailure: error => ({
-    type: Types.ADD_OR_UPDATE_FAILURE,
+  userStateSuccess: data => ({
+    type: Types.STATE_SUCCESS,
+    payload: { data },
+  }),
+
+  userFailure: error => ({
+    type: Types.FAILURE,
     payload: { error },
   }),
 }

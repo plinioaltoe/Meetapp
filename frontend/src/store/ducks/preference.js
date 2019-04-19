@@ -26,7 +26,7 @@ export default function preference(state = INITIAL_STATE, action) {
         ...state,
         loading: false,
         error: null,
-        data: action.payload.data,
+        data: { ...action.payload.data },
       }
     case Types.GET_FAILURE:
       return { ...state, loading: false, error: action.payload.error }

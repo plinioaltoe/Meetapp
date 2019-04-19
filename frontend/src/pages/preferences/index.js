@@ -10,45 +10,38 @@ import {
 import { Creators as UserActions } from '../../store/ducks/user'
 
 class Preferences extends Component {
-  static defaultProps = {
-    user: {},
-  }
-
   static propTypes = {
     updateUserRequest: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.string.isRequired,
     user: PropTypes.shape({
-      loading: PropTypes.bool,
-      data: PropTypes.shape({
-        id: PropTypes.number,
-        username: PropTypes.string,
-        email: PropTypes.string,
-        password: PropTypes.string,
-        preferences: PropTypes.arrayOf(PropTypes.number),
-      }),
-    }),
+      id: PropTypes.number,
+      username: PropTypes.string,
+      email: PropTypes.string,
+      password: PropTypes.string,
+      preferences: PropTypes.arrayOf(PropTypes.number),
+    }).isRequired,
   }
 
   state = {
     userPreferences: [],
-    id: 0,
-    username: '',
   }
 
-  componentDidMount = async () => {
-    const { user } = this.props
-    const { data: userLogged } = user
-    this.setState({
-      id: userLogged.id,
-      username: userLogged.username,
-    })
-  }
+  // componentDidMount = async () => {
+  //   const { user } = this.props
+  //   const { data: userLogged } = user
+  //   this.setState({
+  //     id: userLogged.id,
+  //     username: userLogged.username,
+  //   })
+  // }
 
   handleUpdatePreferences = async (e) => {
     e.preventDefault()
-    const { updateUserRequest } = this.props
-    const { userPreferences, id } = this.state
+    const { updateUserRequest, user } = this.props
+    const { userPreferences } = this.state
     updateUserRequest({
-      id,
+      id: user.id,
       preferences: userPreferences,
     })
   }
@@ -63,29 +56,37 @@ class Preferences extends Component {
   }
 
   render() {
-    const { username, userPreferences } = this.state
+    const { userPreferences } = this.state
+    const { loading, error, user } = this.props
     const { handleChangePreferences } = this
     const texto = 'Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para selecionarmos os melhores meetups pra você:'
     return (
       <Container>
         <Form onSubmit={this.handleUpdatePreferences}>
-          <Titulo>Olá {username}</Titulo>
+          {error && <p>{error}</p>}
+          <Titulo>Olá {user && user.username}</Titulo>
           <Descricao>{texto}</Descricao>
           <Text>Preferências</Text>
           <PreferencesList
             handleChangePreferences={handleChangePreferences}
             sentPreferences={userPreferences}
           />
-          <Button type="submit">Continuar</Button>
+          <Button type="submit">
+            {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Continuar'}
+          </Button>
         </Form>
       </Container>
     )
   }
 }
-
-const mapStateToProps = state => ({
-  user: state.user,
-})
+const mapStateToProps = (state) => {
+  console.log('state preferences->', state)
+  return {
+    user: state.user.data,
+    loading: state.user.loading,
+    error: state.user.error,
+  }
+}
 
 const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 

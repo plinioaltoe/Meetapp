@@ -18,6 +18,7 @@ export const Form = styled.form`
   align-items: center;
   width: min-content;
   p {
+    max-width: ${metrics.baseMargin * 15}px;
     color: ${colors.danger};
     margin-bottom: ${metrics.baseMargin}px;
     border: 1px solid ${colors.danger};

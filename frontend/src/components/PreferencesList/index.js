@@ -14,7 +14,7 @@ class PreferencesList extends Component {
 
   static propTypes = {
     handleChangePreferences: PropTypes.func.isRequired,
-    sentPreferences: PropTypes.arrayOf(PropTypes.number),
+    sentPreferences: PropTypes.arrayOf(PropTypes.object),
   }
 
   constructor(props) {
@@ -29,7 +29,6 @@ class PreferencesList extends Component {
     if (!data) return []
 
     const { sentPreferences } = this.props
-    console.log(sentPreferences)
     if (!sentPreferences) return data
     const preferences = []
     let isChecked = false
@@ -78,7 +77,11 @@ class PreferencesList extends Component {
       <Container>
         <ul>
           <li>
-            <Checkbox type="checkbox" value={allIsChecked} onChange={this.handleCheckAll} />
+            <Checkbox
+              type="checkbox"
+              value={allIsChecked}
+              onChange={this.handleCheckAll}
+            />
             <div>{checkAllText}</div>
           </li>
           {preferences.map(pref => (

@@ -5,67 +5,46 @@ import { Creators as UserActions } from '../ducks/user'
 import { Creators as AuthActions } from '../ducks/auth'
 
 export function* addUser(action) {
-  const { payload } = action
-  const {
-    username, email, password, passwordConfirmation,
-  } = payload
-
-  if (password !== passwordConfirmation) {
-    const erroMsg = 'Passwords não conferem!'
-    yield put(UserActions.addOrUpdateUserFailure(erroMsg))
-  } else if (username === '') {
-    const erroMsg = 'Nome de usuário inválido!'
-    yield put(UserActions.addOrUpdateUserFailure(erroMsg))
-  } else {
-    try {
-      const { data } = yield call(api.post, `/users/`, {
-        username,
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-      })
-      const userData = {
-        id: data.id,
-        username: data.username,
-        email: data.email,
-      }
-      yield put(UserActions.addOrUpdateUserSuccess(userData))
-      const route = '/preferences'
-      yield put(AuthActions.authRequest({ email, password, route }))
-    } catch (error) {
-      const erroMsg = 'Erro ao adicionar usuário!'
-      yield put(UserActions.addOrUpdateUserFailure(erroMsg))
-    }
+  try {
+    const { payload: user } = action
+    const { data } = yield call(api.post, `/users/`, user)
+    yield put(UserActions.userSuccess(data))
+    yield put(AuthActions.authRequest(user))
+  } catch (error) {
+    const erroMsg = 'Erro ao adicionar usuário! '
+    yield put(UserActions.userFailure(erroMsg + error))
   }
 }
 
 export function* updateUser(action) {
-  const { payload } = action
-  const {
-    id, username, password, passwordConfirmation, preferences,
-  } = payload
-  if (password !== passwordConfirmation) {
-    const erroMsg = 'Passwords não conferem!'
-    yield put(UserActions.addOrUpdateUserFailure(erroMsg))
-  } else {
-    const userToUpdate = {}
-    if (username) userToUpdate.username = username
-    if (password) userToUpdate.password = password
-    if (passwordConfirmation) userToUpdate.password_confirmation = passwordConfirmation
-    if (preferences) userToUpdate.preferences = preferences
-    try {
-      const { data } = yield call(api.put, `/users/${id}`, userToUpdate)
-      const userData = {
-        id: data.id,
-        username: data.username,
-        email: data.email,
-        preferences: data.preferences,
-      }
-      yield put(UserActions.addOrUpdateUserSuccess(userData))
-      yield put(push('/dashboard'))
-    } catch (error) {
-      const erroMsg = 'Erro ao atualizar usuário'
-      yield put(UserActions.addOrUpdateUserFailure(erroMsg + error + userToUpdate))
-    }
+  try {
+    const { payload: user } = action
+    const { data } = yield call(api.put, `/users/${user.id}`, user)
+    yield put(UserActions.userSuccess(data))
+    yield put(push('/dashboard'))
+  } catch (error) {
+    const erroMsg = 'Erro ao atualizar usuário'
+    yield put(UserActions.userFailure(erroMsg + error))
+  }
+}
+
+export function* getUser(action) {
+  try {
+    const { payload: user } = action
+    const { data } = yield call(api.get, `/users/${user.id}`)
+    yield put(UserActions.userSuccess(data))
+  } catch (error) {
+    const erroMsg = 'Erro ao buscar usuário'
+    yield put(UserActions.userFailure(erroMsg + error))
+  }
+}
+
+export function* changeStateUser(action) {
+  try {
+    const { payload: user } = action
+    yield put(UserActions.userStateSuccess(user))
+  } catch (error) {
+    const erroMsg = 'Erro ao atualizar o state do redux para usuário'
+    yield put(UserActions.userFailure(erroMsg + error))
   }
 }

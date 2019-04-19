@@ -12,6 +12,7 @@ export const Container = styled.div`
   position: relative;
   form {
     p {
+      max-width: ${metrics.baseMargin * 15}px;
       color: ${colors.danger};
       margin-bottom: ${metrics.baseMargin}px;
       border: 1px solid ${colors.danger};
@@ -93,22 +94,5 @@ export const TextArea = styled.textarea`
 
   ::placeholder {
     opacity: 0.5;
-  }
-`
-
-export const Img = styled.div`
-  margin: ${metrics.basePadding * 2}px 0 ${metrics.basePadding * 2}px 0;
-  box-sizing: content-box;
-  border: dashed ${colors.white} 1px;
-  opacity: 0.2;
-  padding: ${metrics.basePadding * 3}px ${metrics.basePadding * 10}px;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  i {
-    color: ${colors.white};
-  }
-  input#file {
-    display: none;
   }
 `

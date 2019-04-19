@@ -10,6 +10,17 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 0 0 ${metrics.baseDefault * 3}px 0;
   position: relative;
+  form {
+    p {
+      max-width: ${metrics.baseMargin * 15}px;
+      color: ${colors.danger};
+      margin-bottom: ${metrics.baseMargin}px;
+      border: 1px solid ${colors.danger};
+      padding: ${metrics.basePadding}px;
+      width: 100%;
+      text-align: center;
+    }
+  }
 `
 export const Text = styled.div`
   font-weight: bold;

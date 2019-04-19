@@ -1,116 +1,135 @@
 import React, { Fragment, Component } from 'react'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import Flatpickr from 'react-flatpickr'
 import PreferencesList from '../../components/PreferencesList'
 import Header from '../../components/Header'
+import Upload from '../../components/Upload'
 import { Creators as MeetupActions } from '../../store/ducks/meetup'
-import { Creators as FileActions } from '../../store/ducks/file'
 
 import 'flatpickr/dist/themes/dark.css'
 
 import {
-  Container, Button, Text, TextField, Img, TextArea, Flat,
+  Container, Button, Text, TextField, TextArea, Flat,
 } from './styles'
 
 class NewMeetup extends Component {
-  static defaultProps = {
-    error: '',
-    errorFile: '',
-  }
-
   static propTypes = {
+    setStateMeetupRequest: PropTypes.func.isRequired,
     addMeetupRequest: PropTypes.func.isRequired,
-    addFileRequest: PropTypes.func.isRequired,
-
-    error: PropTypes.string,
-    errorFile: PropTypes.string,
-    file: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        file: PropTypes.string,
-        name: PropTypes.string,
-        type: PropTypes.string,
-        subtype: PropTypes.string,
-        url: PropTypes.string,
-        createdAt: PropTypes.string,
-        updatedAt: PropTypes.string,
-      }),
-    ).isRequired,
+    error: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
+    meetup: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      fileUrl: PropTypes.string,
+      location: PropTypes.string,
+      eventDate: PropTypes.instanceOf(Date),
+      preferences: PropTypes.arrayOf(PropTypes.object),
+    }).isRequired,
   }
 
-  state = {
-    title: '',
-    description: '',
-    location: '',
-    fileId: '',
-    meetupPreferences: [],
-    eventDate: '',
+  constructor(props) {
+    super(props)
+    this.state = {
+      errorLocalMessage: '',
+    }
   }
 
   handleChange = (e, campo) => {
-    this.setState({ [campo]: e.target.value })
+    const { setStateMeetupRequest } = this.props
+    setStateMeetupRequest({ [campo]: e.target.value })
+  }
+
+  handleChangeFile = ({ fileId, fileUrl }) => {
+    const { setStateMeetupRequest } = this.props
+    setStateMeetupRequest({ fileId, fileUrl })
+  }
+
+  checkFields = () => {
+    const { meetup } = this.props
+    const preferences = []
+    console.log(meetup)
+    meetup.preferences.map(p => preferences.push(p.id))
+    const data = {
+      meetup: {
+        preferences,
+        fileId: meetup.fileId,
+      },
+      hasEmptyFields: false,
+    }
+
+    if (!meetup.title) {
+      this.setState({ errorLocalMessage: 'Título obrigatório.' })
+      data.hasEmptyFields = true
+      return data
+    }
+
+    data.meetup.title = meetup.title
+
+    if (!meetup.description) {
+      this.setState({ errorLocalMessage: 'Descrição obrigatória.' })
+      data.hasEmptyFields = true
+      return data
+    }
+
+    data.meetup.description = meetup.description
+
+    if (!meetup.location) {
+      this.setState({ errorLocalMessage: 'Localização obrigatória.' })
+      data.hasEmptyFields = true
+      return data
+    }
+
+    data.meetup.location = meetup.location
+
+    if (!meetup.eventDate) {
+      this.setState({ errorLocalMessage: 'Data do evento obrigatória.' })
+      data.hasEmptyFields = true
+      return data
+    }
+
+    data.meetup.eventDate = meetup.eventDate
+
+    return data
   }
 
   handleAddMeetup = (e) => {
     e.preventDefault()
     const { addMeetupRequest } = this.props
-    const {
-      title,
-      description,
-      location,
-      fileId,
-      eventDate,
-      meetupPreferences,
-    } = this.state
-    addMeetupRequest({
-      title,
-      description,
-      location,
-      fileId,
-      eventDate,
-      preferences: meetupPreferences,
-    })
+    const data = this.checkFields()
+    if (!data.hasEmptyFields) {
+      addMeetupRequest(data.meetup)
+    }
   }
 
   handleChangePreferences = (preferences) => {
+    const { setStateMeetupRequest } = this.props
     const meetupPreferences = []
     preferences.map((pref) => {
-      if (pref.isChecked) meetupPreferences.push(pref.id)
+      if (pref.isChecked) meetupPreferences.push(pref)
       return true
     })
-    this.setState({ meetupPreferences })
+    setStateMeetupRequest({ preferences: meetupPreferences })
   }
-
-  handleClickUpload = () => {
-    this.fileInputRef.click()
-    this.fileInputRef.addEventListener('change', (file) => {
-      const { addFileRequest } = this.props
-
-      // const fileToUpload = this.fileInputRef.value
-      console.log('file->', file)
-      addFileRequest({
-        fileToUpload: file,
-      })
-    })
-  }
-
-  fileInputRef
 
   render() {
+    const { errorLocalMessage } = this.state
     const {
-      eventDate, title, description, location, meetupPreferences,
-    } = this.state
-    const { error, errorFile, file } = this.props
-    console.log(file)
+      error, loading, meetup, setStateMeetupRequest,
+    } = this.props
+    const {
+      eventDate, title, description, location, meetupPreferences, fileUrl,
+    } = meetup
+
     return (
       <Fragment>
         <Header />
         <Container>
           <form onSubmit={this.handleAddMeetup}>
             {error && <p>{error}</p>}
+            {errorLocalMessage && <p>{errorLocalMessage}</p>}
             <Text>Título</Text>
             <TextField
               placeholder="Digite o título do meetup"
@@ -125,24 +144,7 @@ class NewMeetup extends Component {
               value={description}
               onChange={e => this.handleChange(e, 'description')}
             />
-            {errorFile && <p>{errorFile}</p>}
-            <Text>Imagem</Text>
-            <Img onClick={this.handleClickUpload} htmlFor="file">
-              {file.url ? (
-                <img src={file.url} alt="file" />
-              ) : (
-                <i className="fa fa-camera" />
-              )}
-              <input
-                id="file"
-                type="file"
-                name="file"
-                ref={(input) => {
-                  this.fileInputRef = input
-                }}
-              />
-            </Img>
-
+            <Upload handleChangeFile={this.handleChangeFile} fileUrl={fileUrl} />
             <Text>Localização</Text>
             <TextField
               placeholder="Onde seu meetup irá acontecer?"
@@ -156,7 +158,7 @@ class NewMeetup extends Component {
                 data-enable-time
                 value={eventDate}
                 onChange={(date) => {
-                  this.setState({ eventDate: date })
+                  setStateMeetupRequest({ eventDate: date })
                 }}
               />
             </Flat>
@@ -165,7 +167,9 @@ class NewMeetup extends Component {
               handleChangePreferences={this.handleChangePreferences}
               sentPreferences={meetupPreferences}
             />
-            <Button type="submit">Salvar</Button>
+            <Button type="submit">
+              {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Salvar'}
+            </Button>
           </form>
         </Container>
       </Fragment>
@@ -173,16 +177,16 @@ class NewMeetup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  meetup: state.meetup.data,
-  loading: state.meetup.loading,
-  error: state.meetup.error,
-  file: state.file.data,
-  loadingFile: state.file.loading,
-  errorFile: state.file.error,
-})
-const binders = { ...MeetupActions, ...FileActions }
-const mapDispatchToProps = dispatch => bindActionCreators(binders, dispatch)
+const mapStateToProps = (state) => {
+  console.log('meetupstate->', state)
+  return {
+    meetup: state.meetup.data,
+    loading: state.meetup.loading,
+    error: state.meetup.error,
+  }
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators(MeetupActions, dispatch)
 
 export default connect(
   mapStateToProps,
