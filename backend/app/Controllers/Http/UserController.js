@@ -27,7 +27,8 @@ class UserController {
     const user = await User.findOrFail(params.id)
     const data = request.only(['username', 'email', 'password'])
     const preferences = request.input('preferences')
-    user.merge(data)
+
+    user.merge({ ...data, is_first_access: false })
 
     const trx = await Database.beginTransaction()
 

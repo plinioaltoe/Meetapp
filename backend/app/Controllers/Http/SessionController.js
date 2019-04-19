@@ -1,5 +1,7 @@
 'use strict'
 
+const User = use('App/Models/User')
+
 class SessionController {
   async show ({ auth }) {
     const user = await auth.getUser()
@@ -8,7 +10,12 @@ class SessionController {
 
   async store ({ request, auth }) {
     const { email, password } = request.all()
+
     const token = await auth.attempt(email, password)
+    let user = await User.query()
+      .where('email', email)
+      .fetch()
+    token.user = user
     return token
   }
 }
