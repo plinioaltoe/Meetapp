@@ -7,7 +7,11 @@ class SearchRecommendedController {
   async index ({ request, auth }) {
     const data = request.get()
     const { user } = auth
-    const preferences = JSON.parse(data.preferences)
+
+    const preferences = []
+    const userPreferences = await user.preferences().fetch()
+    userPreferences.rows.map(p => preferences.push(p.id))
+
     const now = moment().format('YYYY-MM-DD HH:mm')
 
     const meetup = await Meetup.query()
@@ -20,6 +24,7 @@ class SearchRecommendedController {
         builder.whereIn('preferences.id', preferences)
       })
       .withCount('users')
+      .orderBy('event_date', 'asc')
       .fetch()
 
     return meetup

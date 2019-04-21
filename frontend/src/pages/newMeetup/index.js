@@ -16,81 +16,78 @@ import {
 
 class NewMeetup extends Component {
   static propTypes = {
-    setStateMeetupRequest: PropTypes.func.isRequired,
     addMeetupRequest: PropTypes.func.isRequired,
     error: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
-    meetup: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-      fileUrl: PropTypes.string,
-      location: PropTypes.string,
-      eventDate: PropTypes.instanceOf(Date),
-      preferences: PropTypes.arrayOf(PropTypes.object),
-    }).isRequired,
   }
 
   constructor(props) {
     super(props)
     this.state = {
       errorLocalMessage: '',
+      title: '',
+      description: '',
+      fileUrl: '',
+      location: '',
+      eventDate: '',
+      preferences: [],
+      fileId: 0,
     }
   }
 
   handleChange = (e, campo) => {
-    const { setStateMeetupRequest } = this.props
-    setStateMeetupRequest({ [campo]: e.target.value })
+    this.setState({ [campo]: e.target.value })
   }
 
   handleChangeFile = ({ fileId, fileUrl }) => {
-    const { setStateMeetupRequest } = this.props
-    setStateMeetupRequest({ fileId, fileUrl })
+    this.setState({ fileId, fileUrl })
   }
 
   checkFields = () => {
-    const { meetup } = this.props
-    const preferences = []
-    console.log(meetup)
-    meetup.preferences.map(p => preferences.push(p.id))
+    const {
+      title, description, location, eventDate, preferences, fileId,
+    } = this.state
+
+    const preferencesIds = []
+
+    preferences.map(p => preferencesIds.push(p.id))
+
     const data = {
       meetup: {
-        preferences,
-        fileId: meetup.fileId,
+        preferences: preferencesIds,
+        title,
+        description,
+        location,
+        eventDate,
       },
       hasEmptyFields: false,
     }
 
-    if (!meetup.title) {
+    if (fileId > 0) data.meetup.fileId = fileId
+
+    if (!title) {
       this.setState({ errorLocalMessage: 'Título obrigatório.' })
       data.hasEmptyFields = true
       return data
     }
 
-    data.meetup.title = meetup.title
-
-    if (!meetup.description) {
+    if (!description) {
       this.setState({ errorLocalMessage: 'Descrição obrigatória.' })
       data.hasEmptyFields = true
       return data
     }
 
-    data.meetup.description = meetup.description
-
-    if (!meetup.location) {
+    if (!location) {
       this.setState({ errorLocalMessage: 'Localização obrigatória.' })
       data.hasEmptyFields = true
       return data
     }
 
-    data.meetup.location = meetup.location
-
-    if (!meetup.eventDate) {
+    if (!eventDate) {
       this.setState({ errorLocalMessage: 'Data do evento obrigatória.' })
       data.hasEmptyFields = true
       return data
     }
-
-    data.meetup.eventDate = meetup.eventDate
 
     return data
   }
@@ -105,23 +102,25 @@ class NewMeetup extends Component {
   }
 
   handleChangePreferences = (preferences) => {
-    const { setStateMeetupRequest } = this.props
     const meetupPreferences = []
     preferences.map((pref) => {
       if (pref.isChecked) meetupPreferences.push(pref)
       return true
     })
-    setStateMeetupRequest({ preferences: meetupPreferences })
+    this.setState({ preferences: meetupPreferences })
   }
 
   render() {
-    const { errorLocalMessage } = this.state
     const {
-      error, loading, meetup, setStateMeetupRequest,
-    } = this.props
-    const {
-      eventDate, title, description, location, meetupPreferences, fileUrl,
-    } = meetup
+      errorLocalMessage,
+      eventDate,
+      title,
+      description,
+      location,
+      preferences,
+      fileUrl,
+    } = this.state
+    const { error, loading } = this.props
 
     return (
       <Fragment>
@@ -158,14 +157,14 @@ class NewMeetup extends Component {
                 data-enable-time
                 value={eventDate}
                 onChange={(date) => {
-                  setStateMeetupRequest({ eventDate: date })
+                  this.setState({ eventDate: date })
                 }}
               />
             </Flat>
             <Text>Preferências</Text>
             <PreferencesList
               handleChangePreferences={this.handleChangePreferences}
-              sentPreferences={meetupPreferences}
+              sentPreferences={preferences}
             />
             <Button type="submit">
               {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Salvar'}

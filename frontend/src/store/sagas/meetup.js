@@ -15,13 +15,37 @@ export function* addMeetup(action) {
   }
 }
 
-export function* changeStateMeetup(action) {
+export function* getMeetup(action) {
   try {
-    console.log(action)
     const { payload: meetup } = action
-    yield put(MeetupActions.meetupStateSuccess(meetup))
+    const { data } = yield call(api.get, `/meetups/${meetup.id}`)
+    yield put(MeetupActions.meetupSuccess(data))
   } catch (error) {
-    const erroMsg = 'Erro ao atualizar o state do redux para meetup'
+    const erroMsg = 'Erro ao buscar meetup!'
+    yield put(MeetupActions.meetupFailure(erroMsg + error))
+  }
+}
+
+export function* signUpMeetup(action) {
+  try {
+    const { payload: meetup } = action
+    const { data } = yield call(api.put, `/attach/${meetup.id}`)
+    yield put(MeetupActions.meetupSuccess(data))
+    yield put(push('/dashboard'))
+  } catch (error) {
+    const erroMsg = 'Erro ao se inscrever no meetup!'
+    yield put(MeetupActions.meetupFailure(erroMsg + error))
+  }
+}
+
+export function* signOffMeetup(action) {
+  try {
+    const { payload: meetup } = action
+    const { data } = yield call(api.put, `/detach/${meetup.id}`)
+    yield put(MeetupActions.meetupSuccess(data))
+    yield put(push('/dashboard'))
+  } catch (error) {
+    const erroMsg = 'Erro ao se desisncrever no meetup!'
     yield put(MeetupActions.meetupFailure(erroMsg + error))
   }
 }

@@ -16,6 +16,7 @@ class SearchSignedController {
       .with('preferences')
       .whereHas('users', builder => builder.where('users.id', user.id))
       .withCount('users')
+      .orderBy('event_date', 'asc')
       .fetch()
 
     return meetup

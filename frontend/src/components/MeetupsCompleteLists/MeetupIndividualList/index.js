@@ -1,26 +1,64 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 import MeetupCard from './MeetupCard'
-import card from '../../../assets/card.png'
 
 import { Container, Content, ButtonPagination } from './styles'
 
 export default class MeetupIndividualList extends Component {
-  state = {}
+  static propTypes = {
+    list: PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      location: PropTypes.string,
+      eventDate: PropTypes.instanceOf(Date),
+      fileUrl: PropTypes.string,
+      numMembers: PropTypes.number,
+    }).isRequired,
+  }
+
+  state = {
+    preparedList: [],
+  }
+
+  componentDidMount = () => this.prepareList()
+
+  prepareList = () => {
+    const { list } = this.props
+
+    const preparedList = []
+    list.map((meetup) => {
+      const {
+        id, file, title, users,
+      } = meetup
+
+      return preparedList.push({
+        id,
+        title,
+        numMembers: users.length,
+        fileUrl: file && file.url,
+      })
+    })
+
+    this.setState({ preparedList })
+  }
 
   render() {
+    const { preparedList } = this.state
+
     return (
       <Container>
         <Content>
-          <div>
-            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" />
-          </div>
-          <div>
-            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" />
-          </div>
-          <div>
-            <MeetupCard id={1} url={card} title="Meetup React Native" numMembers="153" />
-          </div>
+          {preparedList.map(meetup => (
+            <div>
+              <MeetupCard
+                id={meetup.id}
+                title={meetup.title}
+                fileUrl={meetup.fileUrl}
+                numMembers={meetup.numMembers}
+              />
+            </div>
+          ))}
         </Content>
         <ButtonPagination>
           <button type="button" onClick={() => {}}>

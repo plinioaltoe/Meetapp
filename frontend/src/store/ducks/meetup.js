@@ -3,10 +3,10 @@
  */
 
 export const Types = {
-  UPDATE_REQUEST: 'meetup/UPDATE_REQUEST',
   ADD_REQUEST: 'meetup/ADD_REQUEST',
-  SET_STATE_REQUEST: 'meetup/SET_STATE_REQUEST',
-  STATE_SUCCESS: 'user/STATE_SUCCESS',
+  GET_REQUEST: 'meetup/GET_REQUEST',
+  SIGNUP_REQUEST: 'meetup/SIGNUP_REQUEST',
+  SIGNOFF_REQUEST: 'meetup/SIGNOFF_REQUEST',
   SUCCESS: 'meetup/SUCCESS',
   FAILURE: 'meetup/FAILURE',
 }
@@ -21,9 +21,8 @@ const INITIAL_STATE = {
 }
 
 export default function meetup(state = INITIAL_STATE, action) {
-  console.log(state)
   switch (action.type) {
-    case Types.ADD_REQUEST || Types.UPDATE_REQUEST || Types.SET_STATE_REQUEST:
+    case Types.ADD_REQUEST || Types.SIGNUP_REQUEST || Types.SIGNOFF_REQUEST:
       return { ...state, loading: true, error: '' }
     case Types.SUCCESS:
       return {
@@ -31,13 +30,6 @@ export default function meetup(state = INITIAL_STATE, action) {
         loading: false,
         error: '',
         data: action.payload.data,
-      }
-    case Types.STATE_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        error: '',
-        data: { ...state.data, ...action.payload.data },
       }
     case Types.FAILURE:
       return { ...state, loading: false, error: action.payload.error }
@@ -69,18 +61,29 @@ export const Creators = {
     },
   }),
 
-  setStateMeetupRequest: data => ({
-    type: Types.SET_STATE_REQUEST,
-    payload: data,
+  getMeetupRequest: id => ({
+    type: Types.GET_REQUEST,
+    payload: {
+      id,
+    },
+  }),
+
+  signUpMeetupRequest: id => ({
+    type: Types.SIGNUP_REQUEST,
+    payload: {
+      id,
+    },
+  }),
+
+  signOffMeetupRequest: id => ({
+    type: Types.SIGNOFF_REQUEST,
+    payload: {
+      id,
+    },
   }),
 
   meetupSuccess: data => ({
     type: Types.SUCCESS,
-    payload: { data },
-  }),
-
-  meetupStateSuccess: data => ({
-    type: Types.STATE_SUCCESS,
     payload: { data },
   }),
 

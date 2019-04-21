@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import {
   Container, Content, Title, InfoMembers,
@@ -9,13 +9,9 @@ import {
 class MeetupCard extends Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
+    fileUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     numMembers: PropTypes.number.isRequired,
-  }
-
-  state = {
-    redirect: false,
   }
 
   numMembersString = (numMembers) => {
@@ -24,27 +20,26 @@ class MeetupCard extends Component {
     return `${numMembers} membros`
   }
 
-  goToMeetupDetail = () => this.setState({ redirect: true })
-
   render() {
     const {
-      id, url, title, numMembers,
+      id, fileUrl, title, numMembers,
     } = this.props
-    const { redirect } = this.state
+
     const linkTo = `/meetupDetail/${id}`
     return (
       <Fragment>
-        {redirect && <Redirect push to={linkTo} />}
         <Container>
-          <img src={url} alt="Meetup thumbnail" />
+          <img src={fileUrl} alt="Meetup thumbnail" />
           <Content>
             <div>
               <Title>{title}</Title>
               <InfoMembers>{this.numMembersString(numMembers)} </InfoMembers>
             </div>
-            <button type="button" onClick={this.goToMeetupDetail}>
-              <i className="fa fa-chevron-right" />
-            </button>
+            <Link to={linkTo}>
+              <button type="button">
+                <i className="fa fa-chevron-right" />
+              </button>
+            </Link>
           </Content>
         </Container>
       </Fragment>

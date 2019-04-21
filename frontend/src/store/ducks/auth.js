@@ -6,6 +6,7 @@ export const Types = {
   REQUEST: 'auth/REQUEST',
   FAILURE: 'auth/FAILURE',
   SUCCESS: 'auth/SUCCESS',
+  LOGOUT: 'auth/LOGOUT',
 }
 
 /**
@@ -19,6 +20,8 @@ const INITIAL_STATE = {
 
 export default function auth(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case Types.LOGOUT:
+      return INITIAL_STATE
     case Types.REQUEST:
       return { ...state, loading: true, error: '' }
     case Types.FAILURE:

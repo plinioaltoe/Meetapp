@@ -10,8 +10,10 @@ export const Container = styled.div`
 
   img {
     border-radius: ${metrics.baseRadius}px ${metrics.baseRadius}px 0 0;
-    width: ${metrics.thumbWidth}px;
-    height: ${metrics.thumbHeight}px;
+    min-width: ${metrics.thumbWidth}px;
+    min-height: ${metrics.thumbHeight}px;
+    max-width: ${metrics.thumbWidth}px;
+    max-height: ${metrics.thumbHeight}px;
   }
 `
 
