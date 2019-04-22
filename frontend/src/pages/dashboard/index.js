@@ -13,19 +13,41 @@ class Dashboard extends Component {
   static propTypes = propTypes
 
   state = {
-    text: '',
+    title: '',
   }
 
   componentDidMount = () => {
-    const { searchRequest } = this.props
-    searchRequest()
+    this.handleSearch()
   }
 
-  handleSubmit = (e) => {
+  handleSearch = (e) => {
     e.preventDefault()
-    const { text } = this.state
     const { searchRequest } = this.props
-    searchRequest(text)
+    const { title } = this.state
+    searchRequest({
+      title,
+      page: 1,
+      shouldSearchSigned: true,
+      shouldSearchNotSigned: true,
+      shouldSearchRecommended: true,
+    })
+  }
+
+  handlePaginate = ({
+    page,
+    shouldSearchSigned,
+    shouldSearchNotSigned,
+    shouldSearchRecommended,
+  }) => {
+    const { searchRequest } = this.props
+    const { title } = this.state
+    searchRequest({
+      title,
+      page,
+      shouldSearchSigned,
+      shouldSearchNotSigned,
+      shouldSearchRecommended,
+    })
   }
 
   render() {
@@ -35,7 +57,7 @@ class Dashboard extends Component {
 
     const { text } = this.state
     const searchBar = (
-      <Container onSubmit={this.handleSubmit}>
+      <Container onSubmit={this.handleSearch}>
         <button type="submit">
           <i className="fa fa-search" />
         </button>
@@ -50,15 +72,27 @@ class Dashboard extends Component {
         <ContainerList>
           <ContentList>
             Inscrições
-            <MeetupList list={signed} />
+            <MeetupList
+              list={signed}
+              handlePaginate={this.handlePaginate}
+              search="signed"
+            />
           </ContentList>
           <ContentList>
             Próximos Meetups
-            <MeetupList list={notSigned} />
+            <MeetupList
+              list={notSigned}
+              handlePaginate={this.handlePaginate}
+              search="notSigned"
+            />
           </ContentList>
           <ContentList>
             Recomendados
-            <MeetupList list={recommended} />
+            <MeetupList
+              list={recommended}
+              handlePaginate={this.handlePaginate}
+              search="recommended"
+            />
           </ContentList>
         </ContainerList>
       </Fragment>

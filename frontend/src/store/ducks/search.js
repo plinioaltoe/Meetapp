@@ -14,9 +14,18 @@ export const Types = {
 const INITIAL_STATE = {
   loading: false,
   data: {
-    recommended: [],
-    signed: [],
-    notSigned: [],
+    recommended: {
+      page: 1,
+      data: [],
+    },
+    signed: {
+      page: 1,
+      data: [],
+    },
+    notSigned: {
+      page: 1,
+      data: [],
+    },
   },
   error: '',
 }
@@ -30,7 +39,7 @@ export default function search(state = INITIAL_STATE, action) {
         ...state,
         loading: false,
         error: '',
-        data: action.payload.data,
+        data: { ...state.data, ...action.data.payload },
       }
     case Types.FAILURE:
       return { ...state, loading: false, error: action.payload.error }
@@ -43,10 +52,20 @@ export default function search(state = INITIAL_STATE, action) {
  * Actions
  */
 export const Creators = {
-  searchRequest: title => ({
+  searchRequest: ({
+    title,
+    page,
+    shouldSearchSigned,
+    shouldSearchNotSigned,
+    shouldSearchRecommended,
+  }) => ({
     type: Types.REQUEST,
     payload: {
       title: !title ? '' : title,
+      page,
+      shouldSearchSigned,
+      shouldSearchNotSigned,
+      shouldSearchRecommended,
     },
   }),
 

@@ -26,6 +26,8 @@ export default class MeetupList extends Component {
         }),
       ),
     }).isRequired,
+    handlePaginate: PropTypes.func.isRequired,
+    search: PropTypes.string.isRequired,
   }
 
   state = {
@@ -56,7 +58,8 @@ export default class MeetupList extends Component {
 
   render() {
     const { preparedList } = this.state
-    const page = 0
+    const { handlePaginate, list, search } = this.props
+    const { page, lastPage } = list
     return (
       <Container>
         <Content>
@@ -72,17 +75,49 @@ export default class MeetupList extends Component {
           ))}
         </Content>
         <ButtonPagination>
-          <button type="button" onClick={() => {}}>
+          <button
+            disabled={page === 1}
+            type="button"
+            onClick={() => handlePaginate({
+              page: 1,
+              search,
+            })
+            }
+          >
             <i className="fa fa-angle-double-left" />
           </button>
-          <button type="button" onClick={() => {}}>
+          <button
+            disabled={page === 1}
+            type="button"
+            onClick={() => handlePaginate({
+              page: page - 1,
+              search,
+            })
+            }
+          >
             <i className="fa fa-angle-left" />
           </button>
           <Text>Página: {page}</Text>
-          <button type="button" onClick={() => {}}>
+          <button
+            disabled={page === lastPage}
+            type="button"
+            onClick={() => handlePaginate({
+              page: page + 1,
+              search,
+            })
+            }
+          >
             <i className="fa fa-angle-right" />
           </button>
-          <button type="button" onClick={() => {}}>
+          <button
+            disabled={page === lastPage}
+            type="button"
+            onClick={() => handlePaginate({
+              page: lastPage,
+              search,
+            })
+            }
+          >
             <i className="fa fa-angle-double-right" />
           </button>
         </ButtonPagination>
