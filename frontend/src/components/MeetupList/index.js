@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import MeetupCard from './MeetupCard'
 
-import { Container, Content, ButtonPagination } from './styles'
+import {
+  Container, Content, ButtonPagination, Text,
+} from './styles'
 
 export default class MeetupList extends Component {
   static propTypes = {
@@ -54,7 +56,7 @@ export default class MeetupList extends Component {
 
   render() {
     const { preparedList } = this.state
-
+    const page = 0
     return (
       <Container>
         <Content>
@@ -71,13 +73,17 @@ export default class MeetupList extends Component {
         </Content>
         <ButtonPagination>
           <button type="button" onClick={() => {}}>
-            <i className="fa fa-chevron-left" />
+            <i className="fa fa-angle-double-left" />
           </button>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
           <button type="button" onClick={() => {}}>
-            <i className="fa fa-chevron-right" />
+            <i className="fa fa-angle-left" />
+          </button>
+          <Text>Página: {page}</Text>
+          <button type="button" onClick={() => {}}>
+            <i className="fa fa-angle-right" />
+          </button>
+          <button type="button" onClick={() => {}}>
+            <i className="fa fa-angle-double-right" />
           </button>
         </ButtonPagination>
       </Container>

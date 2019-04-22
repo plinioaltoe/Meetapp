@@ -34,7 +34,15 @@ button {
   background: ${colors.primary};
   border-style: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   i {
     color: ${colors.white};
   }
+`
+
+export const Text = styled.div`
+  font-size: ${metrics.font.smaller}px;
+  color: ${colors.regular};
 `
