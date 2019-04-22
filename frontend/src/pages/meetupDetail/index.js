@@ -37,41 +37,14 @@ class MeetupDetail extends Component {
     getMeetupRequest: PropTypes.func.isRequired,
     signUpMeetupRequest: PropTypes.func.isRequired,
     signOffMeetupRequest: PropTypes.func.isRequired,
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      id: '',
-      title: '',
-      description: '',
-      location: '',
-      eventDate: '',
-      fileUrl: '',
-      numMembers: 0,
-      users: [],
-    }
+    error: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
   }
 
   componentDidMount = async () => {
     const { match, getMeetupRequest } = this.props
     const { id } = match.params
     await getMeetupRequest(id)
-  }
-
-  componentWillReceiveProps = (newProps) => {
-    const { meetup } = newProps
-
-    this.setState({
-      id: meetup.id,
-      title: meetup.title,
-      description: meetup.description,
-      location: meetup.location,
-      eventDate: meetup.event_date,
-      fileUrl: meetup.file && meetup.file.url,
-      numMembers: meetup.users.length,
-      users: meetup.users,
-    })
   }
 
   numMembersString = (numMembers) => {
@@ -81,25 +54,26 @@ class MeetupDetail extends Component {
   }
 
   isInMeetup = () => {
-    const { users } = this.state
-    const { userLoggedId } = this.props
-    const index = users.findIndex(user => user.id === userLoggedId)
+    const { userLoggedId, meetup } = this.props
+    const index = meetup.users.findIndex(user => user.id === userLoggedId)
     if (index >= 0) return true
     return false
   }
 
   render() {
     const {
-      id,
-      title,
-      description,
-      location,
-      eventDate,
-      fileUrl,
-      numMembers,
-    } = this.state
+      signUpMeetupRequest,
+      signOffMeetupRequest,
+      meetup,
+      error,
+      loading,
+    } = this.props
 
-    const { signUpMeetupRequest, signOffMeetupRequest } = this.props
+    const {
+      id, title, description, location, event_date: eventDate, users,
+    } = meetup
+    const fileUrl = meetup.file && meetup.file.url
+    const numMembers = users.length
     const handleClick = this.isInMeetup()
       ? { func: signOffMeetupRequest, text: 'Cancelar Inscrição' }
       : { func: signUpMeetupRequest, text: 'Inscreva-se' }
@@ -108,6 +82,7 @@ class MeetupDetail extends Component {
       <Fragment>
         <Header />
         <Container>
+          {error && <p>{error}</p>}
           <img src={fileUrl} alt="Meetup" />
           <Content>
             <Titulo>{title}</Titulo>
@@ -117,7 +92,9 @@ class MeetupDetail extends Component {
             <Endereco>{location}</Endereco>
             <Detalhes>Quando:</Detalhes>
             <Endereco>{moment(eventDate).format('LLLL')}</Endereco>
-            <Button onClick={() => handleClick.func(id)}>{handleClick.text}</Button>
+            <Button onClick={() => handleClick.func(id)}>
+              {loading ? <i className="fa fa-spinner fa-pulse" /> : handleClick.text}
+            </Button>
           </Content>
         </Container>
       </Fragment>
@@ -125,15 +102,12 @@ class MeetupDetail extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('detailstate->', state)
-  return {
-    userLoggedId: state.auth.data.id,
-    meetup: state.meetup.data,
-    loading: state.meetup.loading,
-    error: state.meetup.error,
-  }
-}
+const mapStateToProps = state => ({
+  userLoggedId: state.auth.data.id,
+  meetup: state.meetup.data,
+  loading: state.meetup.loading,
+  error: state.meetup.error,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(MeetupActions, dispatch)
 

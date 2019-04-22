@@ -17,6 +17,16 @@ export const Container = styled.div`
     min-height: ${metrics.thumbHeight * 2}px;
     padding: 0 0 ${metrics.basePadding * 3}px 0;
   }
+
+  p {
+    max-width: ${metrics.baseMargin * 15}px;
+    color: ${colors.danger};
+    margin-bottom: ${metrics.baseMargin}px;
+    border: 1px solid ${colors.danger};
+    padding: ${metrics.basePadding}px;
+    width: 100%;
+    text-align: center;
+  }
 `
 export const Content = styled.div`
   max-width: ${metrics.baseMargin * 15}px;

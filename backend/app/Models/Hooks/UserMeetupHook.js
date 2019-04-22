@@ -9,7 +9,6 @@ const Meetup = use('App/Models/Meetup')
 const UserMeetupHook = (exports = module.exports = {})
 
 UserMeetupHook.sendSignedUpMeetupEmail = async meetupInstance => {
-  console.log(meetupInstance.dirty)
   const user = await User.findOrFail(meetupInstance.dirty.user_id)
   const meetup = await Meetup.findOrFail(meetupInstance.dirty.meetup_id)
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-
 import PropTypes from 'prop-types'
 import { ConnectedRouter } from 'connected-react-router'
 import Dashboard from '../pages/dashboard'
@@ -9,7 +8,6 @@ import MeetupDetail from '../pages/meetupDetail'
 import NewMeetup from '../pages/newMeetup'
 import Preferences from '../pages/preferences'
 import Profile from '../pages/profile'
-import Search from '../pages/search'
 import Signup from '../pages/signup'
 import history from './history'
 
@@ -48,7 +46,7 @@ const Routes = () => (
       <PrivateRoute exact path="/newMeetup" component={NewMeetup} />
       <PrivateRoute exact path="/preferences" component={Preferences} />
       <PrivateRoute exact path="/profile" component={Profile} />
-      <PrivateRoute exact path="/search" component={Search} />
+      <PrivateRoute exact path="/search" component={Dashboard} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </ConnectedRouter>

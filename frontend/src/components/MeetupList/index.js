@@ -4,16 +4,25 @@ import MeetupCard from './MeetupCard'
 
 import { Container, Content, ButtonPagination } from './styles'
 
-export default class MeetupIndividualList extends Component {
+export default class MeetupList extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/no-unused-prop-types
     list: PropTypes.shape({
-      id: PropTypes.number,
-      title: PropTypes.string,
-      description: PropTypes.string,
-      location: PropTypes.string,
-      eventDate: PropTypes.instanceOf(Date),
-      fileUrl: PropTypes.string,
-      numMembers: PropTypes.number,
+      total: PropTypes.string.isRequired,
+      perPage: PropTypes.number.isRequired,
+      page: PropTypes.number.isRequired,
+      lastPage: PropTypes.number.isRequired,
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          title: PropTypes.string,
+          description: PropTypes.string,
+          location: PropTypes.string,
+          eventDate: PropTypes.instanceOf(Date),
+          fileUrl: PropTypes.string,
+          numMembers: PropTypes.number,
+        }),
+      ),
     }).isRequired,
   }
 
@@ -21,13 +30,13 @@ export default class MeetupIndividualList extends Component {
     preparedList: [],
   }
 
-  componentDidMount = () => this.prepareList()
+  componentWillReceiveProps = newProps => this.prepareList(newProps)
 
-  prepareList = () => {
-    const { list } = this.props
+  prepareList = (newProps) => {
+    const { list } = newProps
 
     const preparedList = []
-    list.map((meetup) => {
+    list.data.map((meetup) => {
       const {
         id, file, title, users,
       } = meetup
@@ -50,7 +59,7 @@ export default class MeetupIndividualList extends Component {
       <Container>
         <Content>
           {preparedList.map(meetup => (
-            <div>
+            <div key={meetup.id}>
               <MeetupCard
                 id={meetup.id}
                 title={meetup.title}

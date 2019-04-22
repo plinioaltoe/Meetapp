@@ -7,9 +7,13 @@ import {
 } from './styles'
 
 class MeetupCard extends Component {
+  static defaultProps = {
+    fileUrl: '',
+  }
+
   static propTypes = {
     id: PropTypes.number.isRequired,
-    fileUrl: PropTypes.string.isRequired,
+    fileUrl: PropTypes.string,
     title: PropTypes.string.isRequired,
     numMembers: PropTypes.number.isRequired,
   }

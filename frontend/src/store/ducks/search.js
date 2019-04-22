@@ -31,17 +31,6 @@ export default function search(state = INITIAL_STATE, action) {
         loading: false,
         error: '',
         data: action.payload.data,
-        // data: {
-        //   recommended: [...state.data.recommended, action.payload.data.recommended].sort(
-        //     (a, b) => a.event_date - b.event_date,
-        //   ),
-        //   signed: [...state.data.signed, action.payload.data.signed].sort(
-        //     (a, b) => a.event_date - b.event_date,
-        //   ),
-        //   notSigned: [...state.data.notSigned, action.payload.data.notSigned].sort(
-        //     (a, b) => a.event_date - b.event_date,
-        //   ),
-        // },
       }
     case Types.FAILURE:
       return { ...state, loading: false, error: action.payload.error }
@@ -54,7 +43,7 @@ export default function search(state = INITIAL_STATE, action) {
  * Actions
  */
 export const Creators = {
-  searchRequest: ({ title }) => ({
+  searchRequest: title => ({
     type: Types.REQUEST,
     payload: {
       title: !title ? '' : title,

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { colors, metrics } from '../../../../styles'
+import { colors, metrics } from '../../../styles'
 
 export const Container = styled.div`
   background: ${colors.white};
