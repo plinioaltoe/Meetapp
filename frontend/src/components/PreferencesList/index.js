@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { Container, Checkbox } from './styles'
 import api from '../../services/api'
 
-import { Creators as PreferenceActions } from '../../store/ducks/preference'
+import { Creators as UserActions } from '../../store/ducks/user'
 
 class PreferencesList extends Component {
   static defaultProps = {
@@ -33,26 +33,24 @@ class PreferencesList extends Component {
   }
 
   componentWillReceiveProps = (newProps) => {
-    this.setState({ preferences: this.checkSentPreferences(newProps) })
+    this.checkSentPreferences(newProps)
   }
 
   checkSentPreferences = (newProps) => {
     const { sentPreferences } = newProps
-
-    if (!sentPreferences) return []
     const { preferences } = this.state
 
     const checkedPreferences = []
     let isChecked = false
 
-    preferences.map((pref) => {
+    preferences.forEach((pref) => {
       isChecked = false
       const idx = sentPreferences.findIndex(p => p.id === pref.id)
       if (idx > -1) isChecked = true
-      return checkedPreferences.push({ ...pref, isChecked })
+      checkedPreferences.push({ ...pref, isChecked })
     })
 
-    return checkedPreferences
+    this.setState({ preferences: checkedPreferences })
   }
 
   handleCheck = (id) => {
@@ -60,7 +58,7 @@ class PreferencesList extends Component {
     const { preferences } = this.state
     const index = preferences.findIndex(p => p.id === id)
     preferences[index].isChecked = !preferences[index].isChecked
-    this.setState({ ...preferences })
+    this.setState({ ...preferences, allIsChecked: false })
     handleChangePreferences(preferences)
   }
 
@@ -91,27 +89,28 @@ class PreferencesList extends Component {
             />
             <div>{checkAllText}</div>
           </li>
-          {preferences.map(pref => (
-            <li key={pref.id}>
-              <Checkbox
-                onChange={() => this.handleCheck(pref.id)}
-                type="checkbox"
-                checked={pref.isChecked}
-              />
-              <div>{pref.subject}</div>
-            </li>
-          ))}
+          {preferences.map((pref) => {
+            const isChecked = { checked: pref.isChecked ? pref.isChecked : false }
+            return (
+              <li key={pref.id}>
+                <Checkbox
+                  onChange={() => this.handleCheck(pref.id)}
+                  type="checkbox"
+                  {...isChecked}
+                />
+                <div>{pref.subject}</div>
+              </li>
+            )
+          })}
         </ul>
       </Container>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  preferences: state.preference.data,
-})
+const mapStateToProps = () => ({})
 
-const mapDispatchToProps = dispatch => bindActionCreators(PreferenceActions, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 
 export default connect(
   mapStateToProps,

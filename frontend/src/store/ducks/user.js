@@ -65,9 +65,17 @@ export const Creators = {
     },
   }),
 
-  updateUserRequest: data => ({
+  updateUserRequest: ({
+    id, username, password, passwordConfirmation, preferences,
+  }) => ({
     type: Types.UPDATE_REQUEST,
-    payload: data,
+    payload: {
+      id,
+      username,
+      password,
+      password_confirmation: passwordConfirmation,
+      preferences,
+    },
   }),
 
   setStateUserRequest: data => ({

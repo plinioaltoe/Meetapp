@@ -11,6 +11,7 @@ import { Creators as UserActions } from '../../store/ducks/user'
 
 class Preferences extends Component {
   static propTypes = {
+    setStateUserRequest: PropTypes.func.isRequired,
     updateUserRequest: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string.isRequired,
@@ -19,35 +20,32 @@ class Preferences extends Component {
       username: PropTypes.string,
       email: PropTypes.string,
       password: PropTypes.string,
-      preferences: PropTypes.arrayOf(PropTypes.number),
+      preferences: PropTypes.arrayOf(PropTypes.object),
     }).isRequired,
-  }
-
-  state = {
-    userPreferences: [],
   }
 
   handleUpdatePreferences = async (e) => {
     e.preventDefault()
     const { updateUserRequest, user } = this.props
-    const { userPreferences } = this.state
+    const preferences = []
+    user.preferences.map(p => preferences.push(p.id))
     updateUserRequest({
       id: user.id,
-      preferences: userPreferences,
+      preferences,
     })
   }
 
   handleChangePreferences = (preferences) => {
+    const { setStateUserRequest } = this.props
     const userPreferences = []
     preferences.map((pref) => {
-      if (pref.isChecked) userPreferences.push(pref.id)
+      if (pref.isChecked) userPreferences.push(pref)
       return true
     })
-    this.setState({ userPreferences })
+    setStateUserRequest({ preferences: userPreferences })
   }
 
   render() {
-    const { userPreferences } = this.state
     const { loading, error, user } = this.props
     const { handleChangePreferences } = this
     const texto = 'Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para selecionarmos os melhores meetups pra você:'
@@ -60,7 +58,7 @@ class Preferences extends Component {
           <Text>Preferências</Text>
           <PreferencesList
             handleChangePreferences={handleChangePreferences}
-            sentPreferences={userPreferences}
+            sentPreferences={user.preferences}
           />
           <Button type="submit">
             {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Continuar'}
@@ -70,14 +68,11 @@ class Preferences extends Component {
     )
   }
 }
-const mapStateToProps = (state) => {
-  console.log('state preferences->', state)
-  return {
-    user: state.user.data,
-    loading: state.user.loading,
-    error: state.user.error,
-  }
-}
+const mapStateToProps = state => ({
+  user: state.user.data,
+  loading: state.user.loading,
+  error: state.user.error,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 

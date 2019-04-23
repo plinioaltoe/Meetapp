@@ -46,3 +46,9 @@ export const Text = styled.div`
   font-size: ${metrics.font.smaller}px;
   color: ${colors.regular};
 `
+export const HiddenDiv = styled.div`
+  min-width: ${metrics.thumbWidth}px;
+  min-height: ${metrics.thumbHeight}px;
+  max-width: ${metrics.thumbWidth}px;
+  max-height: ${metrics.thumbHeight}px;
+`

@@ -60,7 +60,6 @@ class Profile extends Component {
   checkFields = () => {
     const { user } = this.props
     const { initialData } = this.state
-    const { username, password } = initialData
     const preferences = []
     user.preferences.map(p => preferences.push(p.id))
     const data = {
@@ -77,7 +76,7 @@ class Profile extends Component {
       return data
     }
 
-    if (username !== user.username) data.user.username = user.username
+    if (initialData.username !== user.username) data.user.username = user.username
 
     if (!user.password) {
       this.setState({ errorLocalMessage: 'Password obrigatório.' })
@@ -85,12 +84,13 @@ class Profile extends Component {
       return data
     }
 
-    if (password !== user.password) {
-      if (user.password !== user.passwordConfirmation) {
-        this.setState({ errorLocalMessage: 'Passwords não conferem.' })
-        data.hasEmptyFields = true
-        return data
-      }
+    if (user.password !== user.passwordConfirmation) {
+      this.setState({ errorLocalMessage: 'Passwords não conferem.' })
+      data.hasEmptyFields = true
+      return data
+    }
+
+    if (initialData.password !== user.password) {
       data.user.password = user.password
       data.user.passwordConfirmation = user.passwordConfirmation
     }
@@ -121,7 +121,9 @@ class Profile extends Component {
     const { errorLocalMessage } = this.state
     const { error, loading, user } = this.props
     const { handleChangePreferences } = this
-
+    user.passwordConfirmation = typeof user.passwordConfirmation === typeof undefined
+      ? user.password
+      : user.passwordConfirmation
     return (
       <Fragment>
         <Header />
@@ -145,15 +147,12 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('state profile->', state)
-  return {
-    userId: state.auth.data.id,
-    user: state.user.data,
-    loading: state.user.loading,
-    error: state.user.error,
-  }
-}
+const mapStateToProps = state => ({
+  userId: state.auth.data.id,
+  user: state.user.data,
+  loading: state.user.loading,
+  error: state.user.error,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 

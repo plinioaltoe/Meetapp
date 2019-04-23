@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import MeetupCard from './MeetupCard'
 
 import {
-  Container, Content, ButtonPagination, Text,
+  Container, Content, ButtonPagination, Text, HiddenDiv,
 } from './styles'
 
 export default class MeetupList extends Component {
@@ -60,6 +60,7 @@ export default class MeetupList extends Component {
     const { preparedList } = this.state
     const { handlePaginate, list, route } = this.props
     const { page, lastPage } = list
+
     return (
       <Container>
         <Content>
@@ -73,6 +74,7 @@ export default class MeetupList extends Component {
               />
             </div>
           ))}
+          {preparedList.length === 2 && <HiddenDiv />}
         </Content>
         <ButtonPagination>
           <button

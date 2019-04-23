@@ -6,7 +6,6 @@ export function* searchMeetups(action) {
   try {
     const { payload: meetup } = action
     const foundData = {}
-    console.log(meetup)
     if (meetup.route === 'signed' || meetup.route === 'all') {
       const { data: signed } = yield call(
         api.get,

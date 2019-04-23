@@ -108,14 +108,11 @@ class Signup extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('state signup->', state)
-  return {
-    user: state.auth.data.user,
-    loading: state.user.loading,
-    error: state.user.error,
-  }
-}
+const mapStateToProps = state => ({
+  user: state.auth.data.user,
+  loading: state.user.loading,
+  error: state.user.error,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 

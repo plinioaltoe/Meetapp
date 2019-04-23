@@ -32,6 +32,7 @@ export function* getUser(action) {
   try {
     const { payload: user } = action
     const { data } = yield call(api.get, `/users/${user.id}`)
+    data.passwordConfirmation = data.password
     yield put(UserActions.userSuccess(data))
   } catch (error) {
     const erroMsg = 'Erro ao buscar usuário'

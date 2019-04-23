@@ -183,14 +183,11 @@ class NewMeetup extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('meetupstate->', state)
-  return {
-    meetup: state.meetup.data,
-    loading: state.meetup.loading,
-    error: state.meetup.error,
-  }
-}
+const mapStateToProps = state => ({
+  meetup: state.meetup.data,
+  loading: state.meetup.loading,
+  error: state.meetup.error,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(MeetupActions, dispatch)
 

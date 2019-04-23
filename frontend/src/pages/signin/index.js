@@ -76,13 +76,10 @@ class Signin extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('state->', state)
-  return {
-    error: state.auth.error,
-    loading: state.auth.loading,
-  }
-}
+const mapStateToProps = state => ({
+  error: state.auth.error,
+  loading: state.auth.loading,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch)
 
