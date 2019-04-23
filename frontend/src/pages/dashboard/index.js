@@ -17,36 +17,21 @@ class Dashboard extends Component {
   }
 
   componentDidMount = () => {
-    this.handleSearch()
+    this.handleSearch({ page: 1, route: 'all' })
   }
 
-  handleSearch = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault()
-    const { searchRequest } = this.props
-    const { title } = this.state
-    searchRequest({
-      title,
-      page: 1,
-      shouldSearchSigned: true,
-      shouldSearchNotSigned: true,
-      shouldSearchRecommended: true,
-    })
+    this.handleSearch({ page: 1, route: 'all' })
   }
 
-  handlePaginate = ({
-    page,
-    shouldSearchSigned,
-    shouldSearchNotSigned,
-    shouldSearchRecommended,
-  }) => {
+  handleSearch = ({ page, route }) => {
     const { searchRequest } = this.props
     const { title } = this.state
     searchRequest({
       title,
       page,
-      shouldSearchSigned,
-      shouldSearchNotSigned,
-      shouldSearchRecommended,
+      route,
     })
   }
 
@@ -55,13 +40,16 @@ class Dashboard extends Component {
       location, signed, notSigned, recommended,
     } = this.props
 
-    const { text } = this.state
+    const { title } = this.state
     const searchBar = (
-      <Container onSubmit={this.handleSearch}>
+      <Container onSubmit={this.handleSubmit}>
         <button type="submit">
           <i className="fa fa-search" />
         </button>
-        <TextField value={text} onChange={e => this.setState({ text: e.target.value })} />
+        <TextField
+          value={title}
+          onChange={e => this.setState({ title: e.target.value })}
+        />
       </Container>
     )
 
@@ -72,26 +60,22 @@ class Dashboard extends Component {
         <ContainerList>
           <ContentList>
             Inscrições
-            <MeetupList
-              list={signed}
-              handlePaginate={this.handlePaginate}
-              search="signed"
-            />
+            <MeetupList list={signed} handlePaginate={this.handleSearch} route="signed" />
           </ContentList>
           <ContentList>
             Próximos Meetups
             <MeetupList
               list={notSigned}
-              handlePaginate={this.handlePaginate}
-              search="notSigned"
+              handlePaginate={this.handleSearch}
+              route="notSigned"
             />
           </ContentList>
           <ContentList>
             Recomendados
             <MeetupList
               list={recommended}
-              handlePaginate={this.handlePaginate}
-              search="recommended"
+              handlePaginate={this.handleSearch}
+              route="recommended"
             />
           </ContentList>
         </ContainerList>

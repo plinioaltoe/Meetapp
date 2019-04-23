@@ -14,7 +14,9 @@ class PreferencesList extends Component {
 
   static propTypes = {
     handleChangePreferences: PropTypes.func.isRequired,
-    sentPreferences: PropTypes.arrayOf(PropTypes.object),
+    sentPreferences: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    ),
   }
 
   constructor(props) {
@@ -25,30 +27,35 @@ class PreferencesList extends Component {
     }
   }
 
-  checkSentPreferences = (data) => {
-    if (!data) return []
+  componentDidMount = async () => {
+    const { data } = await api.get('/preferences')
+    this.setState({ preferences: data })
+  }
 
-    const { sentPreferences } = this.props
-    if (!sentPreferences) return data
-    const preferences = []
+  componentWillReceiveProps = (newProps) => {
+    this.setState({ preferences: this.checkSentPreferences(newProps) })
+  }
+
+  checkSentPreferences = (newProps) => {
+    const { sentPreferences } = newProps
+
+    if (!sentPreferences) return []
+    const { preferences } = this.state
+
+    const checkedPreferences = []
     let isChecked = false
 
-    data.map((pref) => {
+    preferences.map((pref) => {
       isChecked = false
       const idx = sentPreferences.findIndex(p => p.id === pref.id)
       if (idx > -1) isChecked = true
-      return preferences.push({ ...pref, isChecked })
+      return checkedPreferences.push({ ...pref, isChecked })
     })
 
-    return preferences
+    return checkedPreferences
   }
 
-  componentWillMount = async () => {
-    const { data } = await api.get('/preferences')
-    this.setState({ preferences: this.checkSentPreferences(data) })
-  }
-
-  handleCheck = (e, id) => {
+  handleCheck = (id) => {
     const { handleChangePreferences } = this.props
     const { preferences } = this.state
     const index = preferences.findIndex(p => p.id === id)
@@ -79,7 +86,7 @@ class PreferencesList extends Component {
           <li>
             <Checkbox
               type="checkbox"
-              value={allIsChecked}
+              checked={allIsChecked}
               onChange={this.handleCheckAll}
             />
             <div>{checkAllText}</div>
@@ -87,10 +94,9 @@ class PreferencesList extends Component {
           {preferences.map(pref => (
             <li key={pref.id}>
               <Checkbox
-                onChange={e => this.handleCheck(e, pref.id)}
+                onChange={() => this.handleCheck(pref.id)}
                 type="checkbox"
                 checked={pref.isChecked}
-                value={pref.id}
               />
               <div>{pref.subject}</div>
             </li>

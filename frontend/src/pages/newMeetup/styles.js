@@ -61,7 +61,7 @@ export const Flat = styled.div`
   input {
     background-color: ${colors.secondary};
     border-radius: ${metrics.baseRadius}px;
-    width: ${metrics.baseDefault * 3}px;
+    width: ${metrics.baseDefault * 3.2}px;
     height: ${metrics.inputHeight}px;
     border: 0;
     margin: 0 0 ${metrics.basePadding * 2}px 0;

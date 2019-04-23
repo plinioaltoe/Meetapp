@@ -27,15 +27,6 @@ class Preferences extends Component {
     userPreferences: [],
   }
 
-  // componentDidMount = async () => {
-  //   const { user } = this.props
-  //   const { data: userLogged } = user
-  //   this.setState({
-  //     id: userLogged.id,
-  //     username: userLogged.username,
-  //   })
-  // }
-
   handleUpdatePreferences = async (e) => {
     e.preventDefault()
     const { updateUserRequest, user } = this.props

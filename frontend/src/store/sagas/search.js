@@ -6,8 +6,8 @@ export function* searchMeetups(action) {
   try {
     const { payload: meetup } = action
     const foundData = {}
-
-    if (meetup.search === 'signed' || meetup.search === 'all') {
+    console.log(meetup)
+    if (meetup.route === 'signed' || meetup.route === 'all') {
       const { data: signed } = yield call(
         api.get,
         `/search_signed?title=${meetup.title}&page=${meetup.page}`,
@@ -15,7 +15,7 @@ export function* searchMeetups(action) {
       foundData.signed = signed
     }
 
-    if (meetup.search === 'notSigned' || meetup.search === 'all') {
+    if (meetup.route === 'notSigned' || meetup.route === 'all') {
       const { data: notSigned } = yield call(
         api.get,
         `/search_not_signed?title=${meetup.title}&page=${meetup.page}`,
@@ -23,7 +23,7 @@ export function* searchMeetups(action) {
       foundData.notSigned = notSigned
     }
 
-    if (meetup.search === 'recommended' || meetup.search === 'all') {
+    if (meetup.route === 'recommended' || meetup.route === 'all') {
       const { data: recommended } = yield call(
         api.get,
         `/search_recommended?title=${meetup.title}&page=${meetup.page}`,

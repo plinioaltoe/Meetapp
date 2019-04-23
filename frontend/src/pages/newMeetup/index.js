@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import Flatpickr from 'react-flatpickr'
+import { Portuguese } from 'flatpickr/dist/l10n/pt'
 import PreferencesList from '../../components/PreferencesList'
 import Header from '../../components/Header'
 import Upload from '../../components/Upload'
@@ -23,6 +24,7 @@ class NewMeetup extends Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
       errorLocalMessage: '',
       title: '',
@@ -156,6 +158,11 @@ class NewMeetup extends Component {
                 placeholder="Quando seu meetup irá acontecer?"
                 data-enable-time
                 value={eventDate}
+                options={{
+                  locale: Portuguese,
+                  time_24hr: true,
+                  dateFormat: 'D, d \\de M \\de Y à\\s H:i',
+                }}
                 onChange={(date) => {
                   this.setState({ eventDate: date })
                 }}

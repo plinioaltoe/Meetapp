@@ -55,6 +55,7 @@ class MeetupDetail extends Component {
 
   isInMeetup = () => {
     const { userLoggedId, meetup } = this.props
+    if (!meetup.users) return false
     const index = meetup.users.findIndex(user => user.id === userLoggedId)
     if (index >= 0) return true
     return false
@@ -73,7 +74,7 @@ class MeetupDetail extends Component {
       id, title, description, location, event_date: eventDate, users,
     } = meetup
     const fileUrl = meetup.file && meetup.file.url
-    const numMembers = users.length
+    const numMembers = users && users.length
     const handleClick = this.isInMeetup()
       ? { func: signOffMeetupRequest, text: 'Cancelar Inscrição' }
       : { func: signUpMeetupRequest, text: 'Inscreva-se' }

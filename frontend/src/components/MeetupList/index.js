@@ -27,7 +27,7 @@ export default class MeetupList extends Component {
       ),
     }).isRequired,
     handlePaginate: PropTypes.func.isRequired,
-    search: PropTypes.string.isRequired,
+    route: PropTypes.string.isRequired,
   }
 
   state = {
@@ -58,7 +58,7 @@ export default class MeetupList extends Component {
 
   render() {
     const { preparedList } = this.state
-    const { handlePaginate, list, search } = this.props
+    const { handlePaginate, list, route } = this.props
     const { page, lastPage } = list
     return (
       <Container>
@@ -80,7 +80,7 @@ export default class MeetupList extends Component {
             type="button"
             onClick={() => handlePaginate({
               page: 1,
-              search,
+              route,
             })
             }
           >
@@ -91,7 +91,7 @@ export default class MeetupList extends Component {
             type="button"
             onClick={() => handlePaginate({
               page: page - 1,
-              search,
+              route,
             })
             }
           >
@@ -103,7 +103,7 @@ export default class MeetupList extends Component {
             type="button"
             onClick={() => handlePaginate({
               page: page + 1,
-              search,
+              route,
             })
             }
           >
@@ -114,7 +114,7 @@ export default class MeetupList extends Component {
             type="button"
             onClick={() => handlePaginate({
               page: lastPage,
-              search,
+              route,
             })
             }
           >
