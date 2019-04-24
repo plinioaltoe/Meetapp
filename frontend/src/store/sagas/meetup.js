@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
+import { toast } from 'react-toastify'
 import api from '../../services/api'
 import { Creators as MeetupActions } from '../ducks/meetup'
 
@@ -8,6 +9,7 @@ export function* addMeetup(action) {
     const { payload: meetup } = action
     const { data } = yield call(api.post, `/meetups/`, meetup)
     yield put(MeetupActions.meetupSuccess(data))
+    toast('Meetup adicionado com sucesso!')
     yield put(push('/dashboard'))
   } catch (error) {
     const erroMsg = 'Erro ao adicionar meetup!'
@@ -31,6 +33,7 @@ export function* signUpMeetup(action) {
     const { payload: meetup } = action
     const { data } = yield call(api.put, `/attach/${meetup.id}`)
     yield put(MeetupActions.meetupSuccess(data))
+    toast('Usuário inscrito com sucesso!')
     yield put(push('/dashboard'))
   } catch (error) {
     const erroMsg = 'Erro ao se inscrever no meetup!'
@@ -43,6 +46,7 @@ export function* signOffMeetup(action) {
     const { payload: meetup } = action
     const { data } = yield call(api.put, `/detach/${meetup.id}`)
     yield put(MeetupActions.meetupSuccess(data))
+    toast('Inscrição cancelada!')
     yield put(push('/dashboard'))
   } catch (error) {
     const erroMsg = 'Erro ao se desisncrever no meetup!'
