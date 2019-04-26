@@ -23,10 +23,10 @@ const INITIAL_STATE = {
 
 export default function user(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.ADD_REQUEST
-      || Types.UPDATE_REQUEST
-      || Types.GET_REQUEST
-      || Types.SET_STATE_REQUEST:
+    case Types.ADD_REQUEST:
+    case Types.UPDATE_REQUEST:
+    case Types.GET_REQUEST:
+    case Types.SET_STATE_REQUEST:
       return { ...state, loading: true, error: '' }
     case Types.SUCCESS:
       return {

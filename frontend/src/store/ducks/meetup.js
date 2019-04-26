@@ -22,7 +22,10 @@ const INITIAL_STATE = {
 
 export default function meetup(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.ADD_REQUEST || Types.SIGNUP_REQUEST || Types.SIGNOFF_REQUEST:
+    case Types.ADD_REQUEST:
+    case Types.GET_REQUEST:
+    case Types.SIGNUP_REQUEST:
+    case Types.SIGNOFF_REQUEST:
       return { ...state, loading: true, error: '' }
     case Types.SUCCESS:
       return {

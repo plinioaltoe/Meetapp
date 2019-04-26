@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects'
 import { Types as AuthTypes } from '../ducks/auth'
 import { Types as UserTypes } from '../ducks/user'
-import { Types as PreferenceTypes } from '../ducks/preference'
+// import { Types as PreferenceTypes } from '../ducks/preference'
 import { Types as MeetupTypes } from '../ducks/meetup'
 import { Types as SearchTypes } from '../ducks/search'
 
@@ -9,7 +9,7 @@ import { signin } from './auth'
 import {
   addUser, updateUser, getUser, changeStateUser,
 } from './user'
-import { getPreferences } from './preference'
+// import { getPreferences } from './preference'
 import {
   addMeetup, getMeetup, signUpMeetup, signOffMeetup,
 } from './meetup'
@@ -22,8 +22,7 @@ export default function* rootSaga() {
   const userUpdate = takeLatest(UserTypes.UPDATE_REQUEST, updateUser)
   const userGet = takeLatest(UserTypes.GET_REQUEST, getUser)
   const userChangeState = takeLatest(UserTypes.SET_STATE_REQUEST, changeStateUser)
-  // Preferences
-  const preferencesGet = takeLatest(PreferenceTypes.GET_REQUEST, getPreferences)
+
   // Meetups
   const meetupAdd = takeLatest(MeetupTypes.ADD_REQUEST, addMeetup)
   const meetupSearch = takeLatest(SearchTypes.REQUEST, searchMeetups)
@@ -37,7 +36,6 @@ export default function* rootSaga() {
     userUpdate,
     userGet,
     userChangeState,
-    preferencesGet,
     meetupAdd,
     meetupSearch,
     meetupGet,
