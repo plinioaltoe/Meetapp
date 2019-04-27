@@ -11,18 +11,26 @@ const Header = () => (
       <img src={logo} alt="logo" />
     </div>
     <Menu>
-      <Link to="/dashboard">Inicio</Link>
-      <Link to="/search">Buscar</Link>
-      <Link to="/newMeetup">Novo meetup</Link>
+      <Link to="/dashboard" id="link-dashboard">
+        Inicio
+      </Link>
+      <Link to="/search" id="link-search">
+        Buscar
+      </Link>
+      <Link to="/newMeetup" id="link-newMeetup">
+        Novo meetup
+      </Link>
     </Menu>
     <MenuProfile>
       <img src={personIcon} alt="profile" />
       <ul>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile" id="link-profile">
+            Profile
+          </Link>
         </li>
         <li>
-          <Link onClick={() => logout()} to="/">
+          <Link onClick={() => logout()} to="/" id="link-logout">
             Logout
           </Link>
         </li>
