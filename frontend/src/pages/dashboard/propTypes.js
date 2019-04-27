@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 export const propTypes = {
   searchRequest: PropTypes.func.isRequired,
   location: PropTypes.shape({
-    location: PropTypes.shape({ pathname: PropTypes.string }),
+    pathname: PropTypes.string,
   }).isRequired,
 
   signed: PropTypes.shape({

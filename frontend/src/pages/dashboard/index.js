@@ -43,7 +43,7 @@ class Dashboard extends Component {
     const { title } = this.state
     const searchBar = (
       <Container onSubmit={this.handleSubmit}>
-        <button type="submit">
+        <button id="search" type="submit">
           <i className="fa fa-search" />
         </button>
         <TextField
@@ -52,7 +52,6 @@ class Dashboard extends Component {
         />
       </Container>
     )
-
     return (
       <Fragment>
         <Header />

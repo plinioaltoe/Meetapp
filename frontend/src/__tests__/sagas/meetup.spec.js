@@ -1,7 +1,7 @@
 import { runSaga } from 'redux-saga'
 import MockAdapter from 'axios-mock-adapter'
 import * as m from 'react-toastify'
-import { push } from 'connected-react-router'
+import {push} from 'connected-react-router'
 import api from '../../services/api'
 import {
   addMeetup,
@@ -13,6 +13,7 @@ import { Creators as MeetupActions } from '../../store/ducks/meetup'
 
 const apiMock = new MockAdapter(api)
 m.toast = jest.fn()
+// push = jest.fn()
 
 describe('Meetup Saga', () => {
   test('should be able to add Meetup', async () => {

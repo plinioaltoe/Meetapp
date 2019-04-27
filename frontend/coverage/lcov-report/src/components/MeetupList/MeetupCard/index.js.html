@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/6</span>
       </div>
     </div>
   </div>
@@ -97,15 +97,7 @@
 52
 53
 54
-55</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+55</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -118,16 +110,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -135,6 +126,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,15 +146,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component, Fragment } from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import { Link } from 'react-router-dom'</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import {</span>
+import {
   Container, Content, Title, InfoMembers,
 } from './styles'
 &nbsp;
-class MeetupCard extends Component <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+class MeetupCard extends Component {
   static defaultProps = {
     fileUrl: '',
   }
@@ -171,18 +171,18 @@ class MeetupCard extends Component <span class="cstat-no" title="statement not c
     numMembers: PropTypes.number.isRequired,
   }
 &nbsp;
-  numMembersString = (<span class="fstat-no" title="function not covered" >numMembers) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (numMembers === 0) <span class="cstat-no" title="statement not covered" >r</span>eturn 'Nenhum membro'</span>
-<span class="cstat-no" title="statement not covered" >    if (numMembers === 1) <span class="cstat-no" title="statement not covered" >r</span>eturn '1 membro'</span>
+  numMembersString = <span class="fstat-no" title="function not covered" >(n</span>umMembers) =&gt; {
+<span class="cstat-no" title="statement not covered" >    if (numMembers === 0) <span class="cstat-no" title="statement not covered" >return 'Nenhum membro'</span></span>
+<span class="cstat-no" title="statement not covered" >    if (numMembers === 1) <span class="cstat-no" title="statement not covered" >return '1 membro'</span></span>
 <span class="cstat-no" title="statement not covered" >    return `${numMembers} membros`</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  render</span>() <span class="cstat-no" title="statement not covered" >{</span>
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
     const {
       id, fileUrl, title, numMembers,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
 &nbsp;
-    const linkTo = `<span class="cstat-no" title="statement not covered" >/meetupDetail/${id}`</span>
+    const linkTo = <span class="cstat-no" title="statement not covered" >`/meetupDetail/${id}`</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;Fragment&gt;
         &lt;Container&gt;
@@ -211,7 +211,7 @@ export default MeetupCard
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Apr 26 2019 22:18:35 GMT-0300 (GMT-03:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Apr 27 2019 12:21:15 GMT-0300 (GMT-03:00)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
