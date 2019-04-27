@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/routes/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/routes</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/20</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import { Switch, Route, Redirect } from 'react-router-dom'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import { ConnectedRouter } from 'connected-react-router'</span>
+<span class="cstat-no" title="statement not covered" >import Dashboard from '../pages/dashboard'</span>
+<span class="cstat-no" title="statement not covered" >import Signin from '../pages/signin'</span>
+<span class="cstat-no" title="statement not covered" >import MeetupDetail from '../pages/meetupDetail'</span>
+<span class="cstat-no" title="statement not covered" >import NewMeetup from '../pages/newMeetup'</span>
+<span class="cstat-no" title="statement not covered" >import Preferences from '../pages/preferences'</span>
+<span class="cstat-no" title="statement not covered" >import Profile from '../pages/profile'</span>
+<span class="cstat-no" title="statement not covered" >import Signup from '../pages/signup'</span>
+<span class="cstat-no" title="statement not covered" >import history from './history'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { isAuthenticated } from '../services/auth'</span>
+&nbsp;
+const PrivateRoute = <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({ component: Component, ...rest }) =&gt; (</span></span></span></span>
+  &lt;Route
+    {...rest}
+    render={<span class="fstat-no" title="function not covered" >props</span> =&gt; (<span class="cstat-no" title="statement not covered" >isAuthenticated() ? (</span>
+      &lt;Component {...props} /&gt;
+    ) : (
+      &lt;Redirect to={{ pathname: '/', state: { from: props.location } }} /&gt;
+    ))
+    }
+  /&gt;
+)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >PrivateRoute.defaultProps = {</span>
+  component: <span class="fstat-no" title="function not covered" >() =&gt; </span>{},
+  location: {},
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >PrivateRoute.propTypes = {</span>
+  component: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  location: PropTypes.object,
+}
+&nbsp;
+const Routes = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; (</span></span>
+<span class="cstat-no" title="statement not covered" >  &lt;ConnectedRouter history={history}&gt;</span>
+    &lt;Switch&gt;
+      &lt;Route exact path="/" component={Signin} /&gt;
+      &lt;Route exact path="/signup" component={Signup} /&gt;
+      &lt;PrivateRoute exact path="/dashboard" component={Dashboard} /&gt;
+      &lt;PrivateRoute exact path="/meetupDetail/:id" component={MeetupDetail} /&gt;
+      &lt;PrivateRoute exact path="/newMeetup" component={NewMeetup} /&gt;
+      &lt;PrivateRoute exact path="/preferences" component={Preferences} /&gt;
+      &lt;PrivateRoute exact path="/profile" component={Profile} /&gt;
+      &lt;PrivateRoute exact path="/search" component={Dashboard} /&gt;
+      &lt;Route path="*" component={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>&lt;h1&gt;Page not found&lt;/h1&gt;} /&gt;</span>
+    &lt;/Switch&gt;
+  &lt;/ConnectedRouter&gt;
+)
+&nbsp;
+export default Routes
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Apr 26 2019 22:18:35 GMT-0300 (GMT-03:00)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/pages/profile/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/pages/profile</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/67</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/62</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component, Fragment } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import { connect } from 'react-redux'</span>
+<span class="cstat-no" title="statement not covered" >import { bindActionCreators } from 'redux'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import Header from '../../components/Header'</span>
+<span class="cstat-no" title="statement not covered" >import UserInputs from '../../components/UserInputs'</span>
+<span class="cstat-no" title="statement not covered" >import PreferencesList from '../../components/PreferencesList'</span>
+<span class="cstat-no" title="statement not covered" >import { Creators as UserActions } from '../../store/ducks/user'</span>
+<span class="cstat-no" title="statement not covered" >import { Container, Button, Text } from './styles'</span>
+&nbsp;
+class Profile extends Component {
+  static propTypes = {
+    updateUserRequest: PropTypes.func.isRequired,
+    setStateUserRequest: PropTypes.func.isRequired,
+    getUserRequest: PropTypes.func.isRequired,
+    userId: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+      email: PropTypes.string,
+      password: PropTypes.string,
+      preferences: PropTypes.arrayOf(PropTypes.object),
+    }).isRequired,
+    error: PropTypes.string.isRequired,
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor</span>(props) <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    super(props)</span>
+<span class="cstat-no" title="statement not covered" >    this.state = {</span>
+      errorLocalMessage: '',
+      initialData: {
+        username: '',
+        password: '',
+      },
+    }
+  }
+&nbsp;
+  componentWillMount = <span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
+    const { getUserRequest, userId } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >    getUserRequest({</span>
+      id: userId,
+    })
+  }
+&nbsp;
+  componentDidMount = <span class="fstat-no" title="function not covered" >() =&gt; </span>{
+    const { user } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const { username, password } = <span class="cstat-no" title="statement not covered" >user</span>
+    const initialData = <span class="cstat-no" title="statement not covered" >{ username, password }</span>
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      initialData,
+    })
+  }
+&nbsp;
+  handleChange = <span class="fstat-no" title="function not covered" >(e</span>, campo) =&gt; {
+    const { setStateUserRequest } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >    setStateUserRequest({ [campo]: e.target.value })</span>
+  }
+&nbsp;
+  checkFields = <span class="fstat-no" title="function not covered" >() =&gt; </span>{
+    const { user } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const { initialData } = <span class="cstat-no" title="statement not covered" >this.state</span>
+    const preferences = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >    user.preferences.map(<span class="fstat-no" title="function not covered" >p </span>=&gt; <span class="cstat-no" title="statement not covered" >preferences.push(p.id))</span></span>
+    const data = <span class="cstat-no" title="statement not covered" >{</span>
+      user: {
+        id: user.id,
+        preferences,
+      },
+      hasEmptyFields: false,
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!user.username) {</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({ errorLocalMessage: 'Nome obrigatório.' })</span>
+<span class="cstat-no" title="statement not covered" >      data.hasEmptyFields = true</span>
+<span class="cstat-no" title="statement not covered" >      return data</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (initialData.username !== user.username) <span class="cstat-no" title="statement not covered" >d</span>ata.user.username = user.username</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!user.password) {</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({ errorLocalMessage: 'Password obrigatório.' })</span>
+<span class="cstat-no" title="statement not covered" >      data.hasEmptyFields = true</span>
+<span class="cstat-no" title="statement not covered" >      return data</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (user.password !== user.passwordConfirmation) {</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({ errorLocalMessage: 'Passwords não conferem.' })</span>
+<span class="cstat-no" title="statement not covered" >      data.hasEmptyFields = true</span>
+<span class="cstat-no" title="statement not covered" >      return data</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (initialData.password !== user.password) {</span>
+<span class="cstat-no" title="statement not covered" >      data.user.password = user.password</span>
+<span class="cstat-no" title="statement not covered" >      data.user.passwordConfirmation = user.passwordConfirmation</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return data</span>
+  }
+&nbsp;
+  handleUpdate = (<span class="fstat-no" title="function not covered" >e) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    e.preventDefault()</span>
+    const { updateUserRequest } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const data = <span class="cstat-no" title="statement not covered" >this.checkFields()</span>
+<span class="cstat-no" title="statement not covered" >    if (!data.hasEmptyFields) {</span>
+<span class="cstat-no" title="statement not covered" >      updateUserRequest(data.user)</span>
+    }
+  }
+&nbsp;
+  handleChangePreferences = (<span class="fstat-no" title="function not covered" >preferences) =&gt; {</span>
+    const { setStateUserRequest } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const userPreferences = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >    preferences.map((<span class="fstat-no" title="function not covered" >pref) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (pref.isChecked) <span class="cstat-no" title="statement not covered" >u</span>serPreferences.push(pref)</span>
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    })
+<span class="cstat-no" title="statement not covered" >    setStateUserRequest({ preferences: userPreferences })</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  render</span>() <span class="cstat-no" title="statement not covered" >{</span>
+    const { errorLocalMessage } = <span class="cstat-no" title="statement not covered" >this.state</span>
+    const { error, loading, user } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const { handleChangePreferences } = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >    user.passwordConfirmation = typeof user.passwordConfirmation === typeof undefined</span>
+      ? user.password
+      : user.passwordConfirmation
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;Fragment&gt;
+        &lt;Header /&gt;
+        &lt;Container&gt;
+          &lt;form onSubmit={this.handleUpdate}&gt;
+            {error &amp;&amp; &lt;p&gt;{error}&lt;/p&gt;}
+            {errorLocalMessage &amp;&amp; &lt;p&gt;{errorLocalMessage}&lt;/p&gt;}
+            &lt;UserInputs display="profile" user={user} handleChange={this.handleChange} /&gt;
+            &lt;Text&gt;Preferências&lt;/Text&gt;
+            &lt;PreferencesList
+              handleChangePreferences={handleChangePreferences}
+              sentPreferences={user.preferences}
+            /&gt;
+            &lt;Button type="submit"&gt;
+              {loading ? &lt;i className="fa fa-spinner fa-pulse" /&gt; : 'Salvar'}
+            &lt;/Button&gt;
+          &lt;/form&gt;
+        &lt;/Container&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}
+&nbsp;
+const mapStateToProps = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >state</span> =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+  userId: state.auth.data.id,
+  user: state.user.data,
+  loading: state.user.loading,
+  error: state.user.error,
+})
+&nbsp;
+const mapDispatchToProps = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >dispatch</span> =&gt; <span class="cstat-no" title="statement not covered" >bindActionCreators(UserActions, dispatch)</span></span>
+&nbsp;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Profile)
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Apr 26 2019 22:18:35 GMT-0300 (GMT-03:00)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

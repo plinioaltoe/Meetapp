@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Upload/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/Upload</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/26</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import api from '../../services/api'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { Container, Img, Text } from './styles'</span>
+&nbsp;
+export default class Upload extends Component <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+  static defaultProps = {
+    fileUrl: '',
+  }
+&nbsp;
+  static propTypes = {
+    handleChangeFile: PropTypes.func.isRequired,
+    fileUrl: PropTypes.string,
+  }
+&nbsp;
+  state = {
+    error: '',
+    loading: false,
+  }
+&nbsp;
+  upload = <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >    this.setState({ loading: true })</span>
+    const { handleChangeFile } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const file = <span class="cstat-no" title="statement not covered" >this.fileInputRef.files[0]</span>
+    const dataFile = <span class="cstat-no" title="statement not covered" >new FormData()</span>
+<span class="cstat-no" title="statement not covered" >    await dataFile.append('file', file)</span>
+    const config = <span class="cstat-no" title="statement not covered" >{</span>
+      headers: { 'content-type': 'multipart/form-data' },
+    }
+<span class="cstat-no" title="statement not covered" >    try <span class="cstat-no" title="statement not covered" >{</span></span>
+      const { data } = <span class="cstat-no" title="statement not covered" >await api.post(`/files/`, dataFile, config)</span>
+<span class="cstat-no" title="statement not covered" >      handleChangeFile({</span>
+        fileId: data.id,
+        fileUrl: data.url,
+      })
+<span class="cstat-no" title="statement not covered" >      this.setState({ error: '' })</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >      this.setState({ error: 'Erro ao fazer upload do arquivo!' })</span>
+    } finally {
+<span class="cstat-no" title="statement not covered" >      this.setState({ loading: false })</span>
+    }
+  }
+&nbsp;
+  handleClickUpload = <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >    this.fileInputRef.click()</span>
+<span class="cstat-no" title="statement not covered" >    this.fileInputRef.addEventListener('change', this.upload)</span>
+  }
+&nbsp;
+  fileInputRef
+&nbsp;
+<span class="fstat-no" title="function not covered" >  render</span>() <span class="cstat-no" title="statement not covered" >{</span>
+    const { fileUrl } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const { error, loading } = <span class="cstat-no" title="statement not covered" >this.state</span>
+    let imgToShow = <span class="cstat-no" title="statement not covered" >&lt;i className="fa fa-camera" /&gt;</span>
+<span class="cstat-no" title="statement not covered" >    if (fileUrl) <span class="cstat-no" title="statement not covered" >i</span>mgToShow = &lt;img src={fileUrl} alt="file" /&gt;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;Container&gt;
+        {Boolean(error) &amp;&amp; &lt;p&gt;{error}&lt;/p&gt;}
+        &lt;Text&gt;Imagem&lt;/Text&gt;
+        &lt;Img onClick={this.handleClickUpload} htmlFor="file" fileUrl={fileUrl}&gt;
+          {loading ? &lt;i className="fa fa-spinner fa-pulse" /&gt; : imgToShow}
+          &lt;input
+            id="file"
+            type="file"
+            name="file"
+            ref={(<span class="fstat-no" title="function not covered" >input) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >              this.fileInputRef = input</span>
+            }}
+          /&gt;
+        &lt;/Img&gt;
+      &lt;/Container&gt;
+    )
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Apr 26 2019 22:18:35 GMT-0300 (GMT-03:00)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

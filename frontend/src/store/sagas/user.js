@@ -26,7 +26,7 @@ export function* updateUser(action) {
     toast('Usuário alterado com sucesso!')
     yield put(push('/dashboard'))
   } catch (error) {
-    const erroMsg = 'Erro ao atualizar usuário'
+    const erroMsg = 'Erro ao atualizar usuário! '
     yield put(UserActions.userFailure(erroMsg + error))
   }
 }
@@ -38,7 +38,7 @@ export function* getUser(action) {
     data.passwordConfirmation = data.password
     yield put(UserActions.userSuccess(data))
   } catch (error) {
-    const erroMsg = 'Erro ao buscar usuário'
+    const erroMsg = 'Erro ao buscar usuário! '
     yield put(UserActions.userFailure(erroMsg + error))
   }
 }
