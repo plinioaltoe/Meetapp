@@ -1,0 +1,42 @@
+export const mockedPropTypes = {
+  list: {
+    total: '9',
+    perPage: 3,
+    page: 2,
+    lastPage: 3,
+    data: [
+      {
+        id: 4,
+        title: '1',
+        description: '1',
+        location: '1',
+        eventDate: new Date(),
+        fileUrl: '',
+        numMembers: 120,
+        users: [],
+      },
+      {
+        id: 5,
+        title: '2',
+        description: '2',
+        location: '2',
+        eventDate: new Date(),
+        fileUrl: '',
+        numMembers: 120,
+        users: [],
+      },
+      {
+        id: 6,
+        title: '3',
+        description: '3',
+        location: '3',
+        eventDate: new Date(),
+        fileUrl: '',
+        numMembers: 120,
+        users: [],
+      },
+    ],
+  },
+  handlePaginate: jest.fn(),
+  route: 'all',
+}

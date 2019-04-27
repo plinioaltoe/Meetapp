@@ -65,7 +65,7 @@ export default class MeetupList extends Component {
       <Container>
         <Content>
           {preparedList.map(meetup => (
-            <div key={meetup.id}>
+            <div key={meetup.id} id="card">
               <MeetupCard
                 id={meetup.id}
                 title={meetup.title}
@@ -80,6 +80,7 @@ export default class MeetupList extends Component {
           <button
             disabled={page === 1}
             type="button"
+            id="first"
             onClick={() => handlePaginate({
               page: 1,
               route,
@@ -91,6 +92,7 @@ export default class MeetupList extends Component {
           <button
             disabled={page === 1}
             type="button"
+            id="prev"
             onClick={() => handlePaginate({
               page: page - 1,
               route,
@@ -103,6 +105,7 @@ export default class MeetupList extends Component {
           <button
             disabled={page === lastPage}
             type="button"
+            id="next"
             onClick={() => handlePaginate({
               page: page + 1,
               route,
@@ -114,6 +117,7 @@ export default class MeetupList extends Component {
           <button
             disabled={page === lastPage}
             type="button"
+            id="last"
             onClick={() => handlePaginate({
               page: lastPage,
               route,
