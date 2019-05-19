@@ -3,6 +3,7 @@ import { push } from 'connected-react-router'
 import api from '../../services/api'
 import { login } from '../../services/auth'
 import { Creators as AuthActions } from '../ducks/auth'
+import { Creators as UserActions } from '../ducks/user'
 
 export function* signin({ payload }) {
   try {
@@ -11,6 +12,7 @@ export function* signin({ payload }) {
     const { user, token } = data
     login(token)
     yield put(AuthActions.authSuccess(user[0]))
+    yield put(UserActions.userSuccess(user[0]))
     const { is_first_access: isFirstAccess } = user[0]
     const route = isFirstAccess ? '/preferences' : '/dashboard'
     yield put(push(route))

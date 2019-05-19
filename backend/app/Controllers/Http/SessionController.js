@@ -14,6 +14,8 @@ class SessionController {
     const token = await auth.attempt(email, password)
     let user = await User.query()
       .where('email', email)
+      .with('meetups')
+      .with('preferences')
       .fetch()
     token.user = user
     return token

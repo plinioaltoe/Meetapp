@@ -1,65 +1,44 @@
-import React, { Component, Fragment } from 'react'
+/* eslint-disable import/no-unresolved */
+import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import { Form } from '@rocketseat/unform'
+import * as Yup from 'yup'
 import Header from '../../components/Header'
 import UserInputs from '../../components/UserInputs'
 import PreferencesList from '../../components/PreferencesList'
 import { Creators as UserActions } from '../../store/ducks/user'
 import { Container, Button, Text } from './styles'
 
-class Profile extends Component {
-  static propTypes = {
-    updateUserRequest: PropTypes.func.isRequired,
-    setStateUserRequest: PropTypes.func.isRequired,
-    getUserRequest: PropTypes.func.isRequired,
-    userId: PropTypes.number.isRequired,
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number,
-      username: PropTypes.string,
-      email: PropTypes.string,
-      password: PropTypes.string,
-      preferences: PropTypes.arrayOf(PropTypes.object),
-    }).isRequired,
-    error: PropTypes.string.isRequired,
-  }
+const schema = Yup.object().shape({
+  username: Yup.string().required('Campo obrigatório'),
+  password: Yup.string()
+    .min(6)
+    .required(),
+  password_confirmation: Yup.string().oneOf(
+    [Yup.ref('password'), null],
+    'Passwords devem ser iguais',
+  ),
+})
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      errorLocalMessage: '',
-      initialData: {
-        username: '',
-        password: '',
-      },
-    }
-  }
+const Profile = ({ user, error, loading, setStateUserRequest, updateUserRequest }) => {
+  const [errorLocalMessage, setErrorLocalMessage] = useState(false)
+  const [username, setUsername] = useState(false)
+  const [password, setPassword] = useState(false)
 
-  componentWillMount = () => {
-    const { getUserRequest, userId } = this.props
-    getUserRequest({
-      id: userId,
-    })
-  }
-
-  componentDidMount = () => {
-    const { user } = this.props
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
     const { username, password } = user
-    const initialData = { username, password }
-    this.setState({
-      initialData,
-    })
-  }
+    setUsername(username)
+    setPassword(password)
+  })
 
-  handleChange = (e, campo) => {
-    const { setStateUserRequest } = this.props
+  function handleChange(e, campo) {
     setStateUserRequest({ [campo]: e.target.value })
   }
 
-  checkFields = () => {
-    const { user } = this.props
-    const { initialData } = this.state
+  function checkFields() {
     const preferences = []
     user.preferences.map(p => preferences.push(p.id))
     const data = {
@@ -71,26 +50,26 @@ class Profile extends Component {
     }
 
     if (!user.username) {
-      this.setState({ errorLocalMessage: 'Nome obrigatório.' })
+      setErrorLocalMessage('Nome obrigatório.')
       data.hasEmptyFields = true
       return data
     }
 
-    if (initialData.username !== user.username) data.user.username = user.username
+    if (username !== user.username) data.user.username = user.username
 
     if (!user.password) {
-      this.setState({ errorLocalMessage: 'Password obrigatório.' })
+      setErrorLocalMessage('Password obrigatório.')
       data.hasEmptyFields = true
       return data
     }
 
     if (user.password !== user.passwordConfirmation) {
-      this.setState({ errorLocalMessage: 'Passwords não conferem.' })
+      setErrorLocalMessage('Passwords não conferem.')
       data.hasEmptyFields = true
       return data
     }
 
-    if (initialData.password !== user.password) {
+    if (password !== user.password) {
       data.user.password = user.password
       data.user.passwordConfirmation = user.passwordConfirmation
     }
@@ -98,53 +77,65 @@ class Profile extends Component {
     return data
   }
 
-  handleUpdate = (e) => {
-    e.preventDefault()
-    const { updateUserRequest } = this.props
-    const data = this.checkFields()
-    if (!data.hasEmptyFields) {
-      updateUserRequest(data.user)
+  function handleUpdate(data) {
+    const dataToSave = checkFields(data)
+    if (!dataToSave.hasEmptyFields) {
+      updateUserRequest(dataToSave.user)
     }
   }
 
-  handleChangePreferences = (preferences) => {
-    const { setStateUserRequest } = this.props
+  function handleChangePreferences(preferences) {
     const userPreferences = []
-    preferences.map((pref) => {
+    preferences.map(pref => {
       if (pref.isChecked) userPreferences.push(pref)
       return true
     })
     setStateUserRequest({ preferences: userPreferences })
   }
 
-  render() {
-    const { errorLocalMessage } = this.state
-    const { error, loading, user } = this.props
-    const { handleChangePreferences } = this
-    user.passwordConfirmation = typeof user.passwordConfirmation === typeof undefined
+  user.passwordConfirmation =
+    typeof user.passwordConfirmation === typeof undefined
       ? user.password
       : user.passwordConfirmation
-    return (
-      <Fragment>
-        <Header />
-        <Container>
-          <form onSubmit={this.handleUpdate}>
-            {error && <p>{error}</p>}
-            {errorLocalMessage && <p>{errorLocalMessage}</p>}
-            <UserInputs display="profile" user={user} handleChange={this.handleChange} />
-            <Text>Preferências</Text>
-            <PreferencesList
-              handleChangePreferences={handleChangePreferences}
-              sentPreferences={user.preferences}
-            />
-            <Button type="submit">
-              {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Salvar'}
-            </Button>
-          </form>
-        </Container>
-      </Fragment>
-    )
-  }
+
+  user.password_confirmation = user.password
+
+  return (
+    <Fragment>
+      <Header />
+      <Container>
+        <Form onSubmit={handleUpdate} initialData={user} schema={schema}>
+          {error && <p>{error}</p>}
+          {errorLocalMessage && <p>{errorLocalMessage}</p>}
+          <UserInputs display="profile" user={user} handleChange={handleChange} />
+          <Text>Preferências</Text>
+          <PreferencesList
+            handleChangePreferences={handleChangePreferences}
+            sentPreferences={user.preferences}
+          />
+          <Button type="submit">
+            {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Salvar'}
+          </Button>
+        </Form>
+      </Container>
+    </Fragment>
+  )
+}
+
+Profile.propTypes = {
+  updateUserRequest: PropTypes.func.isRequired,
+  setStateUserRequest: PropTypes.func.isRequired,
+  getUserRequest: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    username: PropTypes.string,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    preferences: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  error: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({

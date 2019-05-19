@@ -1,7 +1,6 @@
 'use strict'
 
 const Mail = use('Mail')
-const Helpers = use('Helpers')
 
 class MeetupSignupMail {
   static get concurrency () {

@@ -29,15 +29,12 @@ class PreferencesList extends Component {
 
   componentDidMount = async () => {
     const { data } = await api.get('/preferences')
-    this.setState({ preferences: data })
+    this.setState({ preferences: data }, this.checkSentPreferences)
   }
 
-  componentWillReceiveProps = (newProps) => {
-    this.checkSentPreferences(newProps)
-  }
 
-  checkSentPreferences = (newProps) => {
-    const { sentPreferences } = newProps
+  checkSentPreferences = () => {
+    const { sentPreferences } = this.props
     const { preferences } = this.state
 
     const checkedPreferences = []

@@ -20,6 +20,9 @@ class UserController {
     const user = await User.create(data)
     await user.preferences().attach(preferences)
 
+    await user.load('meetups')
+    await user.load('preferences')
+
     return response.created(user)
   }
 
@@ -36,6 +39,9 @@ class UserController {
     await user.save(trx)
 
     await trx.commit()
+
+    await user.load('meetups')
+    await user.load('preferences')
 
     return user
   }
